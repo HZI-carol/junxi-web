@@ -1,0 +1,111 @@
+* {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  list-style-type: none;
+}
+
+a, img {
+  border: 0;
+}
+
+input {
+  outline: none
+}
+
+body {
+  width: 100%;
+  font-size: 12px;
+  font-family: 微软雅黑, Arial, Helvetica, sans-serif, simsun, 宋体;
+  background-color: #f5f4f9
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+  -webkit-transition: color .2s ease-in-out;
+  -moz-transition: color .2s ease-in-out;
+  -o-transition: color .2s ease-in-out;
+  -ms-transition: color .2s ease-in-out;
+  transition: color .2s ease-in-out;
+}
+
+a:hover {
+  color: #690;
+  text-decoration: none;
+}
+
+.l {
+  float: left;
+}
+
+.r {
+  float: right;
+}
+
+.sh {
+  display: block !important;
+}
+
+.sc {
+  overflow: hidden;
+  position: fixed;
+}
+
+hr {
+  display: block;
+  padding: 0;
+  border: 0;
+  height: 0;
+  border-top: 1px solid #eeeeee;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+@media only screen and (min-width: 320px) {
+  html {
+    font-size: 17.07px;
+  }
+}
+
+@media only screen and (min-width: 360px) {
+  html {
+    font-size: 19.2px;
+  }
+}
+
+@media only screen and (min-width: 375px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 400px) {
+  html {
+    font-size: 21.34px;
+  }
+}
+
+@media only screen and (min-width: 414px) {
+  html {
+    font-size: 22.08px;
+  }
+}
+
+@media only screen and (min-width: 640px) {
+  html {
+    font-size: 34.14px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  html {
+    font-size: 40.96px;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  html {
+    font-size: 51.2px;
+  }
+}

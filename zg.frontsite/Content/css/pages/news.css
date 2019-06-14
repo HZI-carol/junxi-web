@@ -1,0 +1,162 @@
+﻿@charset 'UTF-8';
+/* 新闻资讯 */
+.news {
+}
+
+.module-con .wrap {
+}
+
+    .module-con .wrap b {
+        display: block;
+        height: 1px;
+        background-color: #CFCFCF;
+    }
+
+    .module-con .wrap .module-news-selector {
+        width: 1230px;
+        margin: 0 auto;
+    }
+
+        .module-con .wrap .module-news-selector ul li {
+            display: inline-block;
+            margin-right: 45px;
+            height: 60px;
+            line-height: 60px;
+            font-size: 16px;
+            color: #616161;
+            font-weight: bold;
+            border: 1px solid transparent;
+            box-sizing: border-box;
+        }
+
+            .module-con .wrap .module-news-selector ul li:hover {
+                color: #D7141A;
+                cursor: pointer;
+                border-bottom: 2px solid #000;
+            }
+            
+            .module-con .wrap .module-news-selector ul li.active{
+                color: #D7141A;
+                cursor: pointer;
+                border-bottom: 2px solid #000;
+              }
+
+    .module-con .wrap .module-news-content {
+        display: flex;
+        justify-content: space-between;
+        width: 1230px;
+        margin: 0 auto;
+        padding: 20px 0;
+        border-bottom: 1px solid #ccc;
+    }
+
+        .module-con .wrap .module-news-content img {
+            width: 375px;
+            height: 170px;
+        }
+
+        .module-con .wrap .module-news-content .module-company-text {
+            position: relative;
+            width: 830px;
+            height: 170px;
+        }
+
+            .module-con .wrap .module-news-content .module-company-text .text-t .text-company {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+            }
+
+                .module-con .wrap .module-news-content .module-company-text .text-t .text-company > h4 {
+                    font-size: 16px;
+                    color: #333;
+                }
+
+                .module-con .wrap .module-news-content .module-company-text .text-t .text-company > span {
+                    font-size: 14px;
+                    color: #666;
+                }
+
+            .module-con .wrap .module-news-content .module-company-text .text-t > span {
+                font-size: 14px;
+                color: #666;
+            }
+
+            .module-con .wrap .module-news-content .module-company-text .text-c {
+                display: flex;
+                position: absolute;
+                bottom: 0;
+                justify-content: space-between;
+                width: 100%;
+                font-size: 14px;
+                color: #666;
+                margin-top: 70px;
+            }
+
+                .module-con .wrap .module-news-content .module-company-text .text-c .text-left {
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                    .module-con .wrap .module-news-content .module-company-text .text-c .text-left > span {
+                        display: inline-block;
+                        width: 30px;
+                        height: 30px;
+                        background: url(../../images/logo2.png) no-repeat;
+                        border-radius: 50%;
+                        font-size: 16px;
+                    }
+
+                    .module-con .wrap .module-news-content .module-company-text .text-c .text-left > div {
+                        display: inline-block;
+                        margin-left: 7px;
+                    }
+
+                .module-con .wrap .module-news-content .module-company-text .text-c .text-right ul {
+                    display: flex;
+                    justify-content: space-between;
+                }
+
+                    .module-con .wrap .module-news-content .module-company-text .text-c .text-right ul li {
+                        margin-left: 10px;
+                    }
+
+                        .module-con .wrap .module-news-content .module-company-text .text-c .text-right ul li .iconfont {
+                            color: #666;
+                            font-size: 16px;
+                            transition: .5;
+                        }
+
+                            .module-con .wrap .module-news-content .module-company-text .text-c .text-right ul li .iconfont:hover {
+                                cursor: pointer;
+                                color: #D7141A;
+                            }
+
+    .module-con .wrap .module-con-pages ul {
+        text-align: center;
+        margin: 30px 0;
+    }
+
+        .module-con .wrap .module-con-pages ul li {
+            display: inline-block;
+            /* width: 134px;
+  line-height: 42px; */
+            padding: 20px;
+            line-height: 12px;
+            color: #333;
+            border: 1px solid #CFCFCF;
+            border-radius: 3px;
+            text-align: center;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+            .module-con .wrap .module-con-pages ul li:hover {
+                background-color: #D7141A;
+                color: #fff;
+            }
+
+    .module-con .wrap .module-news-content .module-company-text .text-c .text-left .iconfont {
+        font-size: 18px;
+        vertical-align: bottom;
+    }

@@ -1,0 +1,113 @@
+.module-content {
+  width: 100%;
+  overflow: hidden;
+}
+.module-content>.wrapper {
+  width: 1200px;
+  margin: 0 auto;
+}
+.module-content>.wrapper .pootographer {
+  width: 100%;
+  text-align: center;
+}
+.module-content>.wrapper .pootographer .title-pootographer h2 {
+  padding-top: 30px;
+  font-size: 36px;
+  color: #333;
+}
+.module-content>.wrapper .pootographer .title-pootographer p {
+  font-size: 16px;
+  color: #666;
+  padding: 15px 0 37px;
+}
+.module-content>.wrapper .pootographer .pootographer-list .item {
+  width: 285px;
+  height: 306px;
+  float: left;
+  margin-right: 18px;
+  margin-bottom: 18px;
+  -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.1);
+          box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+.module-content>.wrapper .pootographer .pootographer-list .item:nth-child(4n) {
+  margin-right: 0;
+}
+.module-content>.wrapper .pootographer .pootographer-list .item .link {
+  padding: 40px 0;
+  width: 100%;
+  height: 100%;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border: 1px solid #e8e8e8;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+}
+.module-content>.wrapper .pootographer .pootographer-list .item .link:hover {
+  border: 1px solid #9c0;
+  background-color: #9c0;
+  -webkit-transform: scale(1.03);
+      -ms-transform: scale(1.03);
+          transform: scale(1.03);
+}
+.module-content>.wrapper .pootographer .pootographer-list .item .link:hover * {
+  color: #fff !important;
+}
+.module-content>.wrapper .pootographer .pootographer-list .item .link .avatar {
+  width: 114px;
+  border: 1px solid #e8e8e8;
+  height: 114px;
+  position: relative;
+  border-radius: 50%;
+  background-color: #fff;
+}
+.module-content>.wrapper .pootographer .pootographer-list .item .link .avatar img {
+  border-radius: 50%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+      -ms-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  width: 90px;
+  height: 96px;
+}
+.module-content>.wrapper .pootographer .pootographer-list .item .link .info .nickname {
+  font-size: 24px;
+}
+.module-content>.wrapper .pootographer .pootographer-list .item .link .info .intro {
+  margin-top: 9px;
+  font-size: 16px;
+}
+.module-content>.wrapper .pootographer .pootographer-list .item .link .count {
+  width: 100%;
+  font-size: 16px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+.module-content>.wrapper .pootographer .pootographer-list .item .link .count .products,
+.module-content>.wrapper .pootographer .pootographer-list .item .link .count .praise {
+  color: #333;
+}
+.module-content>.wrapper .pootographer .pootographer-list .item .link .count .products span,
+.module-content>.wrapper .pootographer .pootographer-list .item .link .count .praise span {
+  margin-left: 10px;
+  font-weight: 700;
+  color: #666;
+}

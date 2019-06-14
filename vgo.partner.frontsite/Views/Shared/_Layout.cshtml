@@ -1,0 +1,63 @@
+﻿@using vgo.partner.frontsite.Models
+@{
+    var config = ViewBag.SiteConfig as SiteConfig;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @* 基础样式引入 *@
+    @{
+        Html.RenderPartial("~/Views/Shared/_BaseHeader.cshtml");
+    }
+    @* 页面主体样式、脚本等 *@
+    @RenderSection("head", required: false)
+</head>
+<body>
+    @* 页头引入 *@
+    @if (ViewBag.HideHeader == null)
+    {
+        Html.RenderPartial("~/Views/Shared/_Header.cshtml");
+    }
+
+    @* 页面主体 *@
+    <div id="app">
+        @RenderBody()
+    </div>
+
+    <!-- sidebar-->
+    <div class="module-sidebar">
+        <div class="qrcode options" title="二维码">
+            <i class="iconfont icon-erweima"></i>
+            <div class="qrcode-img hover-item">
+                <div class="item">
+                    <img src="@config.full_wxqrcode_url" /><span class="title">微信客服</span>
+                </div>
+            </div>
+        </div>
+        @if (!string.IsNullOrEmpty(config.qq))
+        {
+            <a class="qq options" href="http://wpa.qq.com/msgrd?v=3&amp;uin=@(config.qq)&amp;site=qq&amp;menu=yes" title="联系qq">
+                <i class="iconfont icon-qq"></i>
+            </a>
+        }
+        <a class="telephone options" href="tel:@config.contact_phone" title="联系电话">
+            <i class="iconfont icon-dianhua11"></i>
+            <div class="tel-num hover-item"><span class="label">咨询热线</span><span class="num">@config.contact_phone</span></div>
+        </a><a class="go-top options" href="#" title="回到顶部"><i class="iconfont icon-top"></i></a>
+    </div>
+
+    @if (ViewBag.HideFooter == null)
+    {
+        @* 页脚引入 *@
+        <div class="copy-right">@Html.Raw(config.copyright)</div>
+    }
+
+    @* 页面主体脚本 *@
+    @RenderSection("scripts", required: false)
+</body>
+</html>

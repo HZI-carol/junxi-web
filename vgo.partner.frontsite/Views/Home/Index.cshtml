@@ -1,0 +1,314 @@
+﻿@{
+    ViewBag.Menu = "/";
+    var config = ViewBag.SiteConfig as SiteConfig;
+}
+@using vgo.partner.frontsite.Models
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/index.css" />
+}
+
+<!-- index content-->
+<div class="layout home-tpl-1">
+    <div class="module-slider">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                @if (config.banner_list.Any())
+                {
+                    foreach (var item in config.banner_list)
+                    {
+                        string link_url = item.link_url ?? "javascript:;";
+                        <a class="swiper-slide" href="@link_url"><img src="@item.full_banner_url" /></a>
+                    }
+                }
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+    <div class="row panolist" id="pano">
+        <div class="wrapper">
+            <div class="r-title">
+                <h2>精彩世界 全景展示</h2>
+                <div class="sub-title">所看即所得，无需到现场，即可犹如身临其境，全方位，线上720°旋转实景展示</div>
+            </div>
+            <!-- 全景案例-->
+            <div class="content">
+                @if (config.pano_list.Any())
+                {
+                    <ul class="pano-list clearfix">
+                        @foreach (var pano in config.pano_list)
+                        {
+                            <li class="item">
+                                <a class="images-box" href="@pano.panoview_url" target="_blank">
+                                    <div class="cover"><img src="@pano.full_icon_src" /></div>
+                                    <div class="info">
+                                        <div class="qrcode"><img src="@("/common/qrcode?data=" + HttpUtility.UrlEncode(pano.panoview_url))" /></div>
+                                        <div class="count">
+                                            <div class="praise"><i class="iconfont icon-qinziAPPtubiao-"></i><span>@pano.seecount</span></div>
+                                            <div class="views"><i class="iconfont icon-liulanliang"></i><span>@pano.praisecount</span></div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="buttom">
+                                    <a class="title omit" href="javascript:;">@pano.pano_name</a>
+                                    <div class="author"><i class="iconfont icon-zuozhe"></i><span>作者:</span><a class="name omit" href="javascript:;">@pano.user_nickname</a></div>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="row services">
+        <div class="wrapper">
+            <div class="r-title">
+                <h2>我们的服务</h2>
+                <h3>10多种行业插件，20多种营销插件，40+VR全景交互功能，让用户有不一样的体验</h3>
+            </div>
+            <div class="content clearfix">
+                <div class="item video-frame">
+                    <div class="wrap">
+                        <div class="contain">
+                        </div>
+                        <div class="video-play" id="playBtn"></div>
+                    </div>
+                </div>
+                <div class="info-list fr">
+                    <div class="info-list-item clearfix">
+                        <span class="icon"><img src="/content/images/index/serve_vr.png" alt="" /></span><span class="num">1</span><span class="text-wrap">
+                            <div class="item-title">VR全景拍摄</div>
+                            <p class="item-desc">@(config.site_name)提供稳定的@(config.site_name)VR全景系统、功能强大的全景编辑器、航拍全景+地面全景、全景漫游制作，实现720°无死角，将现实世界真实还原到互联网上。</p>
+                        </span>
+                    </div>
+                    <div class="info-list-item clearfix">
+                        <span class="icon"><img src="/content/images/index/serve_sp.png" alt="" /></span><span class="num">2</span><span class="text-wrap">
+                            <div class="item-title">VR视频制作</div>
+                            <p class="item-desc">@(config.site_name)提供VR视频专业拍摄，技术先进、创意新颖，完整还原真实环境的动态过程，让VR全景世界更生动，让真实更极致！</p>
+                        </span>
+                    </div>
+                    <div class="info-list-item clearfix">
+                        <span class="icon"><img src="/content/images/index/serve_yx.png" alt="" /></span><span class="num">3</span><span class="text-wrap">
+                            <div class="item-title">VR全景营销转化</div>
+                            <p class="item-desc">营销插件、基于阿里云数据五个应用中心的VR全景广告联盟系统，在场景中植入的数字化完美逼真的营销场景，为各行业打造身临其境的交互场景，实现合作伙伴广告效益最大化。</p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row slider">
+        <div class="mask"></div>
+        <div class="wrapper">
+            <div class="content clearfix">
+                <ul class="list">
+                    <li class="list-item fl">
+                        <div class="mask pos-a"></div>
+                        <div class="icon"><img src="/content/images/index/serve4.png" alt="" /></div>
+                        <div class="bt-text"><span class="line-h"></span><span class="num">4</span><span class="text">全景小程序</span></div>
+                        <div class="info-text">
+                            <div class="cell">@(config.site_name)小程序，不仅仅是展示，是一套具有强大营销力的完善的电商系统，致力于为企业提供全新的应用体验，更加便捷广泛地满足合作伙伴移动端的营销需求。</div>
+                        </div>
+                    </li>
+                    <li class="list-item fl">
+                        <div class="mask pos-a"></div>
+                        <div class="icon"><img src="/content/images/index/serve5.png" alt="" /></div>
+                        <div class="bt-text"><span class="line-h"></span><span class="num">5</span><span class="text">7大小程序模板</span></div>
+                        <div class="info-text">
+                            <div class="cell">七大小程序模板，包含教育、餐饮、宠物、数码等行业，可任意添加在小程序中，打造专属个性化小程序，更加美观便捷地实现商品的展示，同时结合VR全景功能提供用户更好的消费体验。</div>
+                        </div>
+                    </li>
+                    <li class="list-item fl">
+                        <div class="mask pos-a"></div>
+                        <div class="icon"><img src="/content/images/index/serve6.png" alt="" /></div>
+                        <div class="bt-text"><span class="line-h"></span><span class="num">6</span><span class="text">VR功能</span></div>
+                        <div class="info-text">
+                            <div class="cell">VR眼镜完美适配全景VR模式，通过智能地图、音乐、视频、文字图片解说等插件功能可在全景里进行互动，带给用户沉浸式体验。</div>
+                        </div>
+                    </li>
+                    <li class="list-item fl">
+                        <div class="mask pos-a"></div>
+                        <div class="icon"><img src="/content/images/index/serve7.png" alt="" /></div>
+                        <div class="bt-text"><span class="line-h"></span><span class="num">7</span><span class="text">行业解决方案</span></div>
+                        <div class="info-text">
+                            <div class="cell">我们针对线上线下展示体验，为重点行业推出具体行业解决方案，包括旅游、电商、地产、学校等行业方案，帮助合作商匹配大型客户。</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row interactive bg-gray">
+        <div class="wrapper">
+            <div class="r-title">
+                <h2>互动功能模块矩阵</h2>
+            </div>
+            <div class="content tac" id="tabWrap">
+                <div class="tab"><span class="tab-item active">行业插件</span><span class="tab-item">营销插件</span><span class="tab-item">交互功能</span></div>
+                <ul class="tab-cont show" id="industry"></ul>
+                <ul class="tab-cont" id="marketing"></ul>
+                <ul class="tab-cont" id="interactive"><img src="/content/images/index/plugin3.png" alt="" /></ul>
+            </div>
+        </div>
+    </div>
+    <div class="row scene bg-gray">
+        <div class="wrapper">
+            <div class="r-title">
+                <h2>产品应用场景</h2>
+            </div>
+            <div class="content">
+                <ul class="list clearfix">
+                    <li class="list-item fl">
+                        <div class="icon fl"><i class="iconfont icon-zhengwu"></i></div>
+                        <div class="info fr">
+                            <h4>政务服务</h4>
+                            <p>通过全景实现政务服务场景可视化，包括政务导览、政务展示、城市规划展览展示、城市形象宣传航拍、城市建设成果汇报等。</p>
+                        </div>
+                    </li>
+                    <li class="list-item fl">
+                        <div class="icon fl"><i class="iconfont icon-hangye"></i></div>
+                        <div class="info fr">
+                            <h4>行业服务</h4>
+                            <p>可应用到房产、汽车、旅游、家居、酒店、娱乐、商场等720°全景展示。</p>
+                        </div>
+                    </li>
+                    <li class="list-item fl">
+                        <div class="icon fl"><i class="iconfont icon-qiye"></i></div>
+                        <div class="info fr">
+                            <h4>企业服务</h4>
+                            <p>全景可快速将你的企业以720°3D全景的形式搬到互联网上，让你足不出户，彰显企业实力，促进销售转化。</p>
+                        </div>
+                    </li>
+                    <li class="list-item fl">
+                        <div class="icon fl"><i class="iconfont icon-qncyz"></i></div>
+                        <div class="info fr">
+                            <h4>创业服务</h4>
+                            <p>全景拥有完善的全景创业体系，通过我们提供的技术培训、案例输出、市场指导让你快速通过VR全景变现。</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- index content-->
+</div>
+<!-- about-->
+<section class="module-content" id="about">
+    <div class="wrapper">
+        <div class="about">
+            <!-- 公司简介-->
+            <div class="company-intro">
+                <!-- join us-->
+                <div class="section-join-us" id="joinus">
+                    <h2 class="section-join-us-title">加入我们</h2>
+                    <div class="title-join-us">
+                        <h3>@(config.site_name)全景合作流程</h3>
+                        <h4>拥有VR全景，实现质的飞跃</h4>
+                    </div>
+                    <div class="content">
+                        <ul class="top">
+                            <li class="item">
+                                <i class="iconfont icon-renwufangtan"></i>
+                                <div class="item-name">合作洽谈</div>
+                            </li>
+                            <li class="item">
+                                <i class="iconfont icon-qianzi"></i>
+                                <div class="item-name">签订合同</div>
+                            </li>
+                            <li class="item">
+                                <i class="iconfont icon-yanshouchaxun"></i>
+                                <div class="item-name">提供账号</div>
+                            </li>
+                            <li class="item">
+                                <i class="iconfont icon-zhandianguanli"></i>
+                                <div class="item-name">正式合作</div>
+                            </li>
+                        </ul>
+                        <div class="path">
+                            <ul class="icons">
+                                <li class="icon"></li>
+                                <li class="icon"></li>
+                                <li class="icon"></li>
+                                <li class="icon"></li>
+                                <li class="icon"></li>
+                                <li class="icon"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="apply">
+                        <h3 class="title">加入@(config.site_name)</h3>
+                        <dvi class="apply-form">
+                            <label>姓名:</label>
+                            <input class="name" type="text" id="name" maxlength="10" /><br>
+                            <label>电话:</label>
+                            <input class="tel" type="text" id="tel" maxlength="11" /><br>
+                            <input class="submit" type="submit" value="立即申请" />
+                        </dvi>
+                        <div class="tip">请填写以上信息，我们会尽快与您联系，并注重保护您的隐私</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script type="text/javascript" src="/Content/js/index.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            var loading = false
+            $.ajaxSetup({
+                beforeSend: function () {
+                    loading = true
+                },
+                complete: function () {
+                    loading = false
+                }
+            })
+
+            $(".submit").click(function () {
+                if (loading) return;
+
+                var name = $("#name").val();
+                var phone = $("#tel").val();
+                if (!name) {
+                    alert("请输入姓名")
+                    return
+                }
+                if (!phone) {
+                    alert("请输入手机号")
+                    return
+                }
+                if (!/^1[345678]\d{9}$/g.test(phone)) {
+                    alert("手机号格式不正确")
+                    return
+                }
+                $.ajax({
+                    url: "@(WebConfigs.ApiUrl)api/partnersite/front/applys",
+                    method: "POST",
+                    dataType: "json",
+                    contentType: 'application/json',
+                    data: JSON.stringify({
+                        fk_partner_id: @config.partner_id,
+                        name: name,
+                        phone: phone,
+                    }),
+                    success: function (res) {
+                        if (res.code == 100) {
+                            alert("提交成功，我们会尽快联系您！");
+                            $("#name").val("");
+                            $("#tel").val("");
+                        } else {
+                            alert(res.msg)
+                        }
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        alert("网络异常请稍后再试！");
+                    }
+                })
+            });
+        });
+    </script>
+}

@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>错误页</title>
+    <link rel="shortcut  icon" type="image/x-icon" href="favicon.ico" media="screen">
+    @{
+        Html.RenderPartial("~/Views/Shared/_BaseHeader.cshtml");
+    }
+    <link rel="stylesheet" type="text/css" href="/content/css/pages/error.css" />
+</head>
+<body>
+    @* 页头引入 *@
+    @{
+        Html.RenderPartial("~/Views/Shared/_Header.cshtml");
+    }
+
+    <section class="error-container">
+        <span class="num1">5</span>
+        <span class="zero"><span class="screen-reader-text">0</span></span>
+        <span class="zero"><span class="screen-reader-text">0</span></span>
+        <div class="status-description">抱歉，服务器出错了！！！</div>
+    </section>
+
+    @* 页脚引入 *@
+    @{
+        Html.RenderPartial("~/Views/Shared/_Footer.cshtml");
+    }
+</body>
+</html>

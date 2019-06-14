@@ -1,0 +1,283 @@
+﻿
+@{
+    Html.RenderPartial("~/Views/Shared/_VueBase.cshtml");
+
+}
+
+<script id="app-market-cart" type="x-template">
+    <!-- 选择支付方式 -->
+    <div class="order-detail dialog" v-bind:style="{'display': showPayDialog ? 'block': 'none'}" v-bind:class="orderList.length > 1 ? '': 'small-size'">
+        <div class="dialog-title"><span class="text">选择支付方式</span><span class="close" @@click="showPayDialog = false">×</span></div>
+        <div class="dialog-content">
+            <div class="title">
+                <i class="icon"></i>
+                <div class="text" style="color:#9c0">订单提交成功</div>
+            </div>
+            <div class="tip" v-show="orderList.length > 1">
+                <div class="label">已提交并生成 {{orderList.length}} 个订单，当前支付第一个订单。</div>
+                <div class="label">若需要支付全部订单请点击 “我的订单” 按钮进入订单列表继续支付。</div>
+            </div>
+            <div class="order-info">
+                <div class="expiration-time item"><span class="label">订单关闭：</span><span class="time"><span class="num">2</span>小时后</span></div>
+                <div class="count item"><span class="label">作品数：</span><span class="num">{{(orderList[0] || {}).panocount}}</span>组</div>
+                <div class="order-num item"><span class="label">订单号：</span><span class="num">{{(orderList[0] || {}).orderno}}</span></div>
+                <div class="pay-type item"><span class="label">支付金额：</span><span style="color:#f00;">¥ {{(orderList[0] || {}).totalprice}}</span></div>
+            </div>
+            <div class="pay-options">
+                <div class="item"><a href="javascript:;" @@click="submitPayOrder(orderList[0], 1)"><i class="iconfont icon-z-alipay"></i><span>支付宝</span></a></div>
+                <div class="item"><a href="javascript:;" @@click="submitPayOrder(orderList[0], 2)"><i class="iconfont icon-weixin"></i><span>微信支付</span></a></div>
+                <div class="item"><a href="javascript:;" @@click="submitPayOrder(orderList[0], 3)" title="请确保余额充足"><i class="iconfont icon-jiaoyi"></i><span>余额支付</span></a></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提交订单 -->
+    <div class="confirm-order dialog" v-bind:style="{'display': showConfirmDialog ? 'block': 'none'}">
+        <div class="dialog-title"><span class="text">提交订单</span><span class="close" @@click="showConfirmDialog = false">×</span></div>
+        <div class="dialog-content">
+            <div class="email">
+                <span class="label">接收邮箱</span>
+                <input class="email-address" placeholder="请填写接收邮箱地址" required="required" type="email" v-model="orderEmail" /><i class="icon">*</i>
+            </div>
+            <div class="tip"><span class="label">注意：填写的邮箱用来接收作品原图，请务必填写真实有效的邮箱地址</span></div>
+            <div class="order-info">
+                <div style="height: 240px; overflow-y: auto">
+                    <div class="item" v-for="item in cartList" v-bind:key="item.id" v-if="item.isSelect">
+                        <div class="img"><img v-bind:src="item.full_icon_src" /></div>
+                        <div class="info">
+                            <div class="title omit">{{item.name}}</div>
+                        </div>
+                        <div class="price">¥ {{item.price}}</div>
+                    </div>
+                </div>
+                <div class="count">
+                    <span>共</span><span class="num">{{selectCount}}</span><span>组</span>
+                    <div class="total"><span>总金额：</span><span class="num">¥ {{totalPrice}}</span></div>
+                </div>
+            </div>
+            <div class="order-options">
+                <div class="item"><a href="javascript:;" @@click="submitOrder">确 定</a></div>
+                <div class="item"><a href="javascript:;" @@click="showConfirmDialog = false">取 消</a></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 购物车 -->
+    <div class="shopping-carts" v-bind:class="showCartDialog ? 'active' : ''">
+        <div class="header">
+            <div class="title">购物车</div>
+            <div class="close" @@click="showCartDialog = false">></div>
+            <div class="select-all">
+                <input type="checkbox" v-model="isSelectAll" /><span>全选</span>
+            </div>
+            <div class="del-selected" @@click="deleteCart()">批量删除</div>
+            <div class="myorder">
+                <a style="color:#fff" href="@WebConfigs.PMarketBuyOrderUrl">我的订单</a>
+            </div>
+        </div>
+        <ul class="product">
+            <li class="item" v-for="item in cartList" v-bind:key="item.id">
+                <div class="checkbox">
+                    <input type="checkbox" v-model="item.isSelect" @@click="select(item)" />
+                </div>
+                <div class="carts-product-info">
+                    <div class="img">
+                        <a v-bind:href="detailPath + item.fk_market_pano_id"><img v-bind:src="item.full_icon_src" /></a>
+                    </div>
+                    <div class="info">
+                        <div class="title omit">{{item.name}}</div>
+                    </div>
+                    <div class="price-and-del">
+                        <div class="price">¥ {{item.price}}</div>
+                        <div class="del" @@click="deleteCart(item)">删除</div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="bottom">
+            <div class="count">
+                <div class="total-num"><span>作品总数</span><span class="num">{{selectCount}}</span><span>组</span></div>
+                <div class="total-price"><span>总价：</span><span class="price">¥ {{totalPrice}}</span></div>
+            </div>
+            <a class="buy mt10" href="javascript:;" @@click="openConfirmOrderDialog"> <span>提交订单</span></a>
+        </div>
+    </div>
+
+    <!-- 购物车按钮-->
+    <div class="options-carts" @@click="openCartDialog">
+        <a href="javascript:;">
+            <i class="iconfont icon-cart"></i><span class="info">购物车</span>
+            <div class="num">{{cartList.length}}</div>
+        </a>
+    </div>
+
+</script>
+
+<script type="text/javascript">
+    (function () {
+        Vue.component("app-market-cart", {
+            template: '<div>' + document.querySelector("#app-market-cart").innerHTML + '</div>',
+            props: {
+                userId: {
+                    type: Number,
+                    required: true
+                },
+                loginUrl: {
+                    type: String,
+                    required: true
+                },
+                detailPath: {
+                    type: String,
+                    required: true
+                },
+                cartList: {
+                    type: Array,
+                    required: true
+                }
+            },
+            data() {
+                return {
+                    showCartDialog: false,
+                    showConfirmDialog: false,
+                    orderEmail: "",
+                    orderList: [],
+                    showPayDialog: false,
+                }
+            },
+            created() {
+                if (this.userId > 0) {
+                    this.getCartList();
+                }
+            },
+            computed: {
+                isSelectAll: {
+                    set(val) {
+                        this.cartList.forEach(function (item) {
+                            item.isSelect = val
+                        })
+                    },
+                    get() {
+                        return this.cartList.filter(function (value) {
+                            return !value.isSelect
+                        }).length == 0
+                    }
+                },
+                selectCount() {
+                    return this.cartList.filter(function (value) {
+                        return value.isSelect
+                    }).length
+                },
+                totalPrice() {
+                    var total = 0
+                    this.cartList.forEach(function (item) {
+                        if (item.isSelect) {
+                            total += item.price
+                        }
+                    })
+                    return total;
+                }
+            },
+            methods: {
+                getCartList() {
+                    this.$emit("getcartlist")
+                },
+                openCartDialog() {
+                    if (this.userId <= 0) {
+                        location.href = this.loginUrl;
+                    } else {
+                        this.showCartDialog = true
+                    }
+                },
+                select(item) {
+                    item.isSelect = !item.isSelect
+                },
+                deleteCart(item) {
+                    var self = this
+                    var ids = []
+                    if (item) {
+                        ids.push(item.id)
+                    } else {
+                        this.cartList.forEach(function (data) {
+                            if (data.isSelect) {
+                                ids.push(data.id)
+                            }
+                        })
+                    }
+                    if (ids.length <= 0) {
+                        this.$message.warning("请选择要删除的作品");
+                        return
+                    }
+                    this.$confirm("确定要删除购物车中选中的作品吗?", "删除提示", {
+                        type: 'warning'
+                    }).then(() => {
+                        this.$service.deleteManyMarketCart(ids, function (res) {
+                            self.getCartList()
+                        })
+                    })
+                },
+                openConfirmOrderDialog() {
+                    var ids = []
+                    this.cartList.forEach(function (data) {
+                        if (data.isSelect) {
+                            ids.push(data.id)
+                        }
+                    })
+                    if (ids.length <= 0) {
+                        this.$message.warning("请选择要购买的作品");
+                        return
+                    }
+                    this.showConfirmDialog = true
+                },
+                submitOrder() {
+                    var self = this
+                    if (!this.orderEmail || /^(\w-*\.*)+(\w-?)+(\.\w{2,})+$/g.test(this.orderEmail)) {
+                        this.$message.warning(" 邮箱格式不正确");
+                        return
+                    }
+                    var ids = []
+                    this.cartList.forEach(function (data) {
+                        if (data.isSelect) {
+                            ids.push(data.id)
+                        }
+                    })
+                    var data = {
+                        pano_cart_ids: ids,
+                        email: self.orderEmail
+                    }
+                    this.$service.submitMarketOrder(data, function (res) {
+                        self.showCartDialog = false
+                        self.showConfirmDialog = false
+                        self.showPayDialog = true
+                        self.orderList = res.data
+                        self.getCartList();
+                    })
+                },
+                submitPayOrder(order, payType) {
+                    var desc = ["", "支付宝支付", "微信支付", "余额支付"]
+                    this.$confirm("确定要使用 <strong style='font-weight: 700;color: #F56C6C;'>" + desc[payType] + "</strong> 吗?", "支付提示", {
+                        dangerouslyUseHTMLString: true,
+                        type: 'warning'
+                    }).then(() => {
+                        if (order) {
+                            var return_url = "@WebConfigs.PMarketBuyOrderUrl"
+                            var data = {
+                                ordertype: 9,
+                                paytype: payType,
+                                productid: order.id,
+                                return_url: encodeURIComponent(return_url)
+                            };
+                            this.$service.submitPayOrder(data, function (res) {
+                                if (res.data) {
+                                    location.href = res.data
+                                } else {
+                                    //若为余额支付则支付成功后直接跳转
+                                    location.href = return_url
+                                }
+                            })
+                        }
+                    })
+                }
+            }
+        })
+    })();
+</script>

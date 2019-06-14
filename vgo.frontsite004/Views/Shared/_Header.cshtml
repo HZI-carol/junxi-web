@@ -1,0 +1,45 @@
+﻿<header class="module-header">
+    <div class="logo">
+        <h2>@WebConfigs.Config.platname</h2>
+    </div>
+    <div class="user">
+        @{
+            if (ViewBag.User == null)
+            {
+                string loginUrl = WebConfigs.ApiUrl + "user/login?redirect_uri=" + HttpUtility.UrlEncode("https://user.vgoyun.com");
+                string registerUrl = WebConfigs.ApiUrl + "user/register?redirect_uri=" + HttpUtility.UrlEncode("https://user.vgoyun.com");
+
+                <div class="options">
+                    <a class="login" href="@WebConfigs.LoginUrl">登录</a>
+                    <a class="signin" href="@WebConfigs.RegisterUrl">注册</a>
+                </div>
+            }
+            else
+            {
+                <div class="user-info">
+                    <div class="avatar"><img src="@ViewBag.User.avatar" /></div>
+                    <div class="nickname omit">@ViewBag.User.nickname</div>
+                    <ul class="user-options">
+                        <li class="item"><a href="@WebConfigs.UserCenterUrl">个人中心</a></li>
+                        <li class="item"><a href="@WebConfigs.UserPanoUrl">我的作品</a></li>
+                        <li class="item"><a href="@WebConfigs.UserAccountUrl">账号管理</a></li>
+                        <li class="item"><a href="@WebConfigs.UserMsgUrl">我的消息</a></li>
+                        <li class="item"><a href="@(WebConfigs.GetPagePath("/logout"))">退出登录</a></li>
+                    </ul>
+                </div>
+            }
+        }
+    </div>
+    <nav class="menu">
+        <ul>
+            <li class="menu-item @(ViewBag.Menu == "/" ? "active": "")"><a href="/">首页</a></li>
+            <li class="menu-item @(ViewBag.Menu == "/pano" ? "active": "")"><a href="@WebConfigs.GetPagePath("/pano")">720全景</a></li>
+            <li class="menu-item @(ViewBag.Menu == "/3dspace" ? "active": "")"><a href="@WebConfigs.GetPagePath("/3dspace")">3D空间</a></li>
+            <li class="menu-item @(ViewBag.Menu == "/photographer" ? "active": "")"><a href="@WebConfigs.GetPagePath("/photographer")">作者</a></li>
+            <li class="menu-item @(ViewBag.Menu == "/news" ? "active": "")"><a href="@WebConfigs.GetPagePath("/news")">资讯</a></li>
+            <li class="menu-item @(ViewBag.Menu == "/panomarket" ? "active": "")"><a href="@WebConfigs.GetPagePath("/panomarket")">作品市场</a></li>
+            <li class="menu-item @(ViewBag.Menu == "/business" ? "active": "")"><a href="@WebConfigs.GetPagePath("/business")">招商加盟</a></li>
+            <li class="menu-item @(ViewBag.Menu == "/about" ? "active": "")"><a href="@WebConfigs.GetPagePath("/about")">关于我们</a></li>
+        </ul>
+    </nav>
+</header>

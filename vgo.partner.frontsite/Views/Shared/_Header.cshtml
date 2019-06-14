@@ -1,0 +1,25 @@
+﻿@using vgo.partner.frontsite.Models
+@{
+    var config = ViewBag.SiteConfig as SiteConfig;
+}
+<header class="module-header">
+    <div class="logo">
+        <h2 style="background-image: url(@config.full_logo_url);">@config.site_name 让全景更简单</h2>
+    </div>
+    <div class="user">
+        <div class="options">
+            <a class="login" href="@WebConfigs.LoginUrl">登录</a>
+            @*<a class="signin" href="@WebConfigs.RegisterUrl">注册</a>*@
+        </div>
+    </div>
+    <nav class="menu">
+        <ul>
+            <li class="menu-item @(ViewBag.Menu == "/" ? "active": "")"><a href="/">首页</a></li>
+            <li class="menu-item @(ViewBag.Menu == "/pano" ? "active": "")"><a href="/pano">全景案例</a></li>
+            <li class="menu-item @(ViewBag.Menu == "/photographer" ? "active": "")"><a href="/photographer">摄影师</a></li>
+            <li class="menu-item @(ViewBag.Menu == "/news" ? "active": "")"><a href="/news">资讯</a></li>
+            @*<li class="menu-item"><a href="#">淘精品</a></li>*@
+            <li class="menu-item @(ViewBag.Menu == "/about" ? "active": "")"><a href="/about">关于我们</a></li>
+        </ul>
+    </nav>
+</header>

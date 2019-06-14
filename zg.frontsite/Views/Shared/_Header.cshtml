@@ -1,0 +1,58 @@
+﻿<!--头部logo和导航-->
+<div class="header-top">
+
+    <div class="head-logo">
+        <a href="/">
+            <img src="@WebConfigs.Config.logo_url" alt="">
+        </a>
+        <span></span>
+    </div>
+
+    <div class="head-register">
+        <ul>
+            @{
+                if (ViewBag.User == null)
+                {
+                    <li><i class="iconfont icon-v"></i><a href="@WebConfigs.RegisterUrl" target="_blank" class="zc">开通VIP</a></li>
+                    <li><a href="@WebConfigs.LoginUrl" target="_blank" class="zc">登录</a></li>
+                }
+                else
+                {
+                    <li class="register">
+                        <div class="avatar"><img src="@ViewBag.User.avatar" /></div>
+                        <div class="nickname omit">@ViewBag.User.nickname</div>
+                        <ul>
+                            <li><a href="@WebConfigs.UserCenterUrl" target="_blank" rel="noopener noreferrer">个人中心</a></li>
+                            <li><a href="@WebConfigs.UserPanoUrl" target="_blank" rel="noopener noreferrer">我的作品</a></li>
+                            <li><a href="@WebConfigs.UserAccountUrl" target="_blank" rel="noopener noreferrer">账号管理</a></li>
+                            <li><a href="@WebConfigs.UserMsgUrl" target="_blank" rel="noopener noreferrer">我的消息</a></li>
+                            <li><a href="/logout" target="_blank" rel="noopener noreferrer">退出登录</a></li>
+                        </ul>
+                    </li>
+                }
+            }
+        </ul>
+    </div>
+    <div class="head-menu">
+        <ul>
+            <li class="@(ViewBag.Menu == "/" ? "active": "")">
+                <a href="/">首页</a>
+            </li>
+            <li class="@(ViewBag.Menu == "/project" ? "active": "")">
+                <a href="/project">全景项目</a>
+            </li>
+            <li class="@(ViewBag.Menu == "/company" ? "active": "")">
+                <a href="/company">装企公司</a>
+            </li>
+            <li class="@(ViewBag.Menu == "#" ? "active": "")">
+                <a href="#">软件套餐</a>
+            </li>
+            <li class="@(ViewBag.Menu == "/news" ? "active": "")">
+                <a href="/news">新闻资讯</a>
+            </li>
+            <li class="@(ViewBag.Menu == "/about" ? "active": "")">
+                <a href="/about">关于我们</a>
+            </li>
+        </ul>
+    </div>
+</div>

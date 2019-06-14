@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "资讯详情";
+    ViewBag.Menu = "/news";
+}
+@using vgo.partner.frontsite.Models
+
+@{
+    var news = Model as News;
+    ViewBag.Title = "资讯详情 - " + news.title;
+}
+
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/news-detail.css" />
+}
+
+<!-- content-->
+<section class="module-content" style="min-height: calc(100vh - 274px);">
+    <div class="wrapper">
+        <div class="news-detail">
+            <section class="article">
+                <h2 class="title">@news.title</h2>
+                <div class="time">@news.created.ToString("yyyy-MM-dd HH:mm")</div>
+                <div class="content">
+                    @Html.Raw(news.content)
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script type="text/javascript" src="/Content/js/pages/news-detail.js"></script>
+}

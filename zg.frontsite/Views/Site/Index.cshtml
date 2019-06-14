@@ -1,0 +1,182 @@
+﻿@{
+    ViewBag.Title = WebConfigs.Config.platname;
+    ViewBag.Menu = "/";
+}
+@using zg.frontsite
+
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/index.css" />
+}
+
+<div class="layout home-tpl-1">
+    <!--轮播图-->
+    @{
+        Html.RenderPartial("~/Views/Shared/_Banner.cshtml");
+    }
+
+    @*<div style="width: 100%;height: 610px;overflow: hidden; position: relative;">
+            <div class="swiper-container" id="swiper1">
+                <div class="swiper-wrapper" style="width: 100%;height: 610px">
+                    <div class="swiper-slide">
+                        <a target="_blank" href="#"><img src="/Content/images/pano/banner1.jpg" /></a>
+                    </div>
+                    <div class="swiper-slide">
+                        <iframe id="iframe" src="https://view.720ps.cn/#/panoview/53675" style="width: 100%;height: 610px" scrolling="no" frameborder="0" marginheight="0" marginwidth="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                    </div>
+                    <div class="swiper-slide">
+                        <video src="/Content/images/pano/banner3.mp4" muted loop autoplay="autoplay" style="display:block;;width:100%;"></video>
+                    </div>
+                    <div class="swiper-slide">
+                        <a target="_blank" href="#"><img src="/Content/images/pano/banner2.jpg" /></a>
+                    </div>
+
+                </div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev" id="swiper1-button-prev"></div>
+                <div class="swiper-button-next" id="swiper1-button-next"></div>
+            </div>
+        </div>*@
+    <!-- 精选推荐 -->
+    <div class="module-con con con1">
+        <div class="wrap">
+            <div class="con-title">
+                <h3 class="title1">
+                    <strong>精选推荐</strong>
+                    <span>还原真实场景, 720全景展示</span>
+                </h3>
+            </div>
+            <div class="module-con-provide">
+                @if (ViewBag.ProjectList != null)
+                {
+                    foreach (Project item in ViewBag.ProjectList)
+                    {
+                        <a href="@("/panoview/" + item.fk_pano_id+"?user_id="+item.user_id)" target="_blank">
+                            <div class="box">
+                                <img src="@item.full_image_url" alt="@item.project_name">
+                                <div class="box-content">
+                                    <h4 class="title">@item.project_name</h4>
+                                </div>
+                            </div>
+                        </a>
+                    }
+                }
+            </div>
+        </div>
+
+    </div>
+    <!-- 优秀装企 -->
+    <div class="module-con con con2">
+        <div class="wrap">
+            <div class="con-title">
+                <h3 class="title1">
+                    <strong>优秀装企</strong>
+                    <span>专业团队独家策划, 720全景展示一站式整装服务</span>
+                </h3>
+                <a class="more" href="/company">更多></a>
+            </div>
+            <!--轮播图2-->
+            <div style="width: 100%;height: 190px;position: relative;">
+                <div class="swiper-container" id="swiper2">
+                    <div class="swiper-wrapper">
+                        @if (ViewBag.CompanyList != null)
+                        {
+                            foreach (Companys item in ViewBag.CompanyList)
+                            {
+                                <div class="swiper-slide" style="margin-right:85px">
+                                    <div class="swiper-slide-content">
+
+                                        <div class="swiper-content-logo">
+                                            <img src="@item.full_logo" alt="">
+                                        </div>
+                                        <div class="swiper-content-company">
+                                            <div class="swiper-company-name">
+                                                <h5>@item.company_name</h5>
+                                                <i class="iconfont icon-yule"></i>
+                                                <i class="iconfont icon-v"></i>
+                                            </div>
+                                            <div class="swiper-company-address">
+                                                <i class="iconfont icon-dizhi"></i>
+                                                <span>@item.address</span>
+                                            </div>
+                                            <span>@item.description</span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="swiper-button-prev" id="swiper2-button-prev"></div>
+                <div class="swiper-button-next" id="swiper2-button-next"></div>
+            </div>
+            @if (ViewBag.ADBannersList != null)
+            {
+                foreach (Banners item in ViewBag.ADBannersList)
+                {
+                    <img src="@item.full_imgurl" alt="@item.title" />
+                }
+            }
+        </div>
+    </div>
+    <!-- 咨询文章 -->
+    <div class="module-con con con3">
+        <div class="wrap">
+            <div class="con-left">
+                <div class="con-title">
+                    <h3 class="title1">
+                        <strong>咨询文章</strong>
+                        <span>聚焦全景，精准解决行业痛点</span>
+                    </h3>
+                    <a class="more" href="/News">更多></a>
+                </div>
+                @if (ViewBag.NewsList != null)
+                {
+                    <div class="con-content">
+                        <ul>
+                            @foreach (News item in ViewBag.NewsList)
+                            {
+                                <li style="margin-bottom:30px;">
+                                    <a href="@("/news/" + item.id)" target="_blank"><img src="@item.full_cover_url" alt=""></a>
+                                    <div class="con-text">
+                                        <h5><a href="@("/news/" + item.id)" target="_blank"> @item.title</a></h5>
+                                        <span>@item.summary</span>
+                                        <div class="con-text-foot">
+                                            <p>
+                                                <i class="iconfont icon-usercenter"></i>
+                                                <span>@item.author</span>
+                                            </p>
+                                            <span>@item.created.ToString("yyyy-MM-dd")</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+            <b></b>
+            <div class="con-right">
+                <div class="con-title">
+                    <h3 class="title1">
+                        推荐热点
+                    </h3>
+                    <a class="more" href="/News">更多></a>
+                </div>
+                @if (ViewBag.NewsSeecountList != null)
+                {
+                    <div class="con-content">
+                        <ul>
+                            @foreach (News item in ViewBag.NewsSeecountList)
+                            {
+                                <li><a href="@("/news/" + item.id)" target="_blank"><img src="@item.full_cover_url" alt=""></a></li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="/Content/js/pages/index.js"></script>

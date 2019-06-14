@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "3D空间";
+    ViewBag.Menu = "/3dspace";
+}
+@using Newtonsoft.Json
+@{
+    var domain = "http://www.3dnest.cn/";
+    var list = new List<dynamic>();
+    list.Add(new { id = "zq_pcylgc_13", title = "音乐谷仓", thumb_url = "images/case_20180611_yygc.jpg" });
+    list.Add(new { id = "zq_jsblhjh_9", title = "将帅碑林", thumb_url = "images/case_20180611_jsbl.jpg" });
+    list.Add(new { id = "zq_gthyjz_25", title = "古田会议旧址", thumb_url = "images/case_20180421_gthyjz.jpg" });
+    list.Add(new { id = "zq_pctkzc_33", title = "天空之城", thumb_url = "images/case_20180421_tkzc.jpg" });
+    list.Add(new { id = "zq_bqxn_8", title = "北汽新能源", thumb_url = "images/case_20180106_bqxny.jpg" });
+    list.Add(new { id = "zq_mqbd_50", title = "明清宝典", thumb_url = "images/case_20180106_mqbd.jpg" });
+    list.Add(new { id = "zhq_szxsg", title = "三中校史馆", thumb_url = "images/case_20180106_szxsg.jpg" });
+    list.Add(new { id = "zhq_blyf_32", title = "百年洋房里的怀旧客厅", thumb_url = "images/case_1101_bnyf.jpg" });
+    list.Add(new { id = "zq_gzys_1", title = "观照艺术空间", thumb_url = "images/case_1101_gzys.jpg" });
+    list.Add(new { id = "ltbwg2", title = "兰亭博物馆", thumb_url = "images/case_06_ltbwg.jpg" });
+    list.Add(new { id = "Starbucks", title = "星巴克", thumb_url = "images/case0_11.jpg" });
+    list.Add(new { id = "wdrh_wttf", title = "行政外滩套房", thumb_url = "images/case2_1.png" });
+}
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/pano.css" />
+    <style type="text/css">
+        .module-banner {
+            height: 360px;
+        }
+
+            .module-banner img {
+                height: auto;
+            }
+
+        .module-content .wrapper {
+            padding: 20px 0 30px 0;
+        }
+
+        .r-title {
+            text-align: center;
+        }
+
+            .r-title h2 {
+                position: relative;
+                font-size: 36px;
+                padding: 18px 0;
+                color: #333;
+                font-family: 'Microsoft YaHei', 'Microsoft Sans Serif';
+            }
+
+                .r-title h2:after {
+                    content: '';
+                    position: absolute;
+                    bottom: 0;
+                    left: 50%;
+                    width: 100px;
+                    height: 2px;
+                    background-color: #9c0;
+                    -webkit-transform: translateX(-50%);
+                    -ms-transform: translateX(-50%);
+                    transform: translateX(-50%);
+                }
+
+        .module-content .pano {
+            margin-top: 50px;
+        }
+    </style>
+}
+
+<!-- banner-->
+<div class="module-banner">
+    <img src="/Content/images/pano/pano-banner.png" />
+</div>
+
+<!-- content-->
+<section class="module-content">
+    <div class="wrapper">
+        <div class="r-title">
+            <h2>3D空间展示</h2>
+        </div>
+        <div class="pano">
+            <ul class="pano-list clearfix">
+                @foreach (var item in list)
+                {
+                    <li class="item">
+                        <a class="images-box" href="@("/3dspace/" + item.id + "?title=" + item.title)" target="_blank">
+                            <div class="cover"><img src="@(domain + item.thumb_url)" /></div>
+                        </a>
+                        <div class="buttom">
+                            <a class="title omit" href="@("/3dspace/" + item.id + "?title=" + item.title)" target="_blank">@item.title</a>
+                            <div class="author">
+                                <i class="iconfont icon-zuozhe"></i><span>作者:</span>
+                                <a class="name omit" href="javascript:;">admin</a>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</section>

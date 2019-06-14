@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = "全景项目";
+    ViewBag.Menu = "/project";
+}
+@using Newtonsoft.Json
+@using zg.frontsite
+
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/project.css" />
+}
+
+<div class="banner">
+    <!--轮播图-->
+    @{
+        Html.RenderPartial("~/Views/Shared/_Banner.cshtml");
+    }
+    @*<img src="/Content/images/pano/banner1.jpg" />*@
+    <div class="find">
+        <div class="find-input">
+            <input type="text" placeholder="请输入关键词" v-model="keyword"> <i class="iconfont icon-sousuo" @@click="getList(1)"></i>
+        </div>
+        <div class="find-keyword">
+            <span>热门关键词：</span>
+            <ul>
+                @foreach (var key in WebConfigs.ProjectHotKeywords)
+                {
+                    <li><a href="#" @@click="hotKeywordClick('@key')">@key</a> <b></b></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- 全景项目 -->
+<div class="module-con con project" v-cloak>
+    <div class="wrap">
+        <div class="con-catalogue">
+            <ul>
+                <li v-bind:class="selectTag.id == undefined ? 'active': ''">
+                    <a href="javascript:;" @@click="tagClick()">全部</a>
+                </li>
+                <li v-for="tag in tagList" v-bind:key="tag.id" v-bind:class="(tag.id == selectTag.id) ? 'active': ''"
+                    @@click="tagClick(tag)">
+                    <div class="info">
+                        <a href="javascript:;" v-html="tag.name"></a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="module-con-provide">
+
+            <div class="box" v-for="item in list" v-bind:key="item.id">
+                <a v-bind:href="item.pc_panoview_url" target="_blank">
+                    <img v-bind:src="item.full_image_url" />
+                    <div class="box-content">
+                        <h4 class="title">{{item.project_name}}</h4>
+                    </div>
+                </a>
+            </div>
+
+        </div>
+        <div class="module-pagination">
+            <el-pagination background layout="total, prev, pager, next" v-bind:total="total" v-bind:page-size="pageSize" v-bind:current-page="page"
+                           @@current-change="getList" v-if="total > 0">
+            </el-pagination>
+            <div class="no-data" v-if="total == 0">暂无数据</div>
+        </div>
+    </div>
+
+</div>
+@section scripts {
+    <script type="text/javascript" src="~/Content/js/pages/project.js"></script>
+    @{
+        Html.RenderPartial("~/Views/Shared/_VueBase.cshtml");
+    }
+    <script type="text/javascript">
+        (function () {
+            var initData = @Html.Raw(JsonConvert.SerializeObject(ViewBag.ProjectList))
+                initData = initData || {}
+            var tagData = @Html.Raw(JsonConvert.SerializeObject(ViewBag.DecorationStyleList))
+                tagData = tagData || []
+
+            new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        page: 1,
+                        pageSize: 12,
+                        list: initData.list || [],
+                        total: initData.count || 0,
+                        tagList: tagData,
+                        selectTag: {},
+                        keyword: ""
+                    }
+                },
+                methods: {
+                    tagClick(tag) {
+                        tag = tag || {}
+                        if (!tag.childtags || tag.childtags.length <= 0) {
+                            this.selectTag = tag
+                            this.getList(1)
+                        }
+                    },
+                    hotKeywordClick(keyword) {
+                        this.keyword = keyword
+                        this.getList(1)
+                    },
+                    getList(page) {
+                        var self = this
+                        this.page = page || 1
+                        var data = {
+                            keyword: this.keyword,
+                            isrecommond:-1,
+                            decoration_style_id: self.selectTag.id || 0,
+                            orderBy: ""
+                        }
+                        this.$service.getProjectList(this.page, this.pageSize, data, function (res) {
+                            var data = res.data
+                            self.list = data.list
+                            self.total = data.count
+                        })
+                    }
+                }
+            })
+        })();
+    </script>
+
+    <script type="text/javascript" src="/Content/js/pages/index.js"></script>
+}

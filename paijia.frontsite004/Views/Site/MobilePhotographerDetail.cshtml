@@ -1,0 +1,99 @@
+﻿@{
+    ViewBag.Title = "摄影师详情";
+    ViewBag.Menu = "/";
+    ViewBag.HideHeader = true;
+    ViewBag.HideFooter = true;
+}
+@using Newtonsoft.Json
+@using vgo.frontsite004.Models
+@{
+    var user = Model as User;
+}
+
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/photographer-detail-mobile.css" />
+}
+
+<!-- content-->
+<section class="module-content">
+    <div class="wrapper">
+        <div class="pootographer-detail-mobile" v-cloak>
+            <!-- 摄影师详情-->
+            <div class="pootographer-info">
+                <div class="avatar"><img src="@user.avatar" /></div>
+                <div class="detail">
+                    <div class="top">
+                        <div class="nickname omit">@user.nickname</div>
+                    </div>
+                    <div class="bottom">
+                        <div class="products omit">作品:<span class="num omit">@user.panonum</span></div>
+                        <div class="popularity omit">人气:<span class="num omit">@user.seecount</span></div>
+                        <div class="praise omit">赞:<span class="num omit">@user.praisecount</span></div>
+                    </div>
+                </div>
+            </div>
+            <div class="title-pootographer-detail">
+                <h2>全景作品</h2>
+            </div>
+            <!-- 作品列表-->
+            <ul class="products-list clearfix">
+                <li class="item" v-for="item in list" v-bind:key="item.pano_id">
+                    <a class="link" v-bind:href="item.panoview_url" target="_blank">
+                        <div class="images-box">
+                            <div class="cover"><img v-bind:src="item.icon_src" /></div>
+                            <div class="info">
+                                <div class="count">
+                                    <div class="praise"><i class="iconfont icon-qinziAPPtubiao-"></i><span>{{item.seecount}}</span></div>
+                                    <div class="views"><i class="iconfont icon-liulanliang"></i><span>{{item.praisecount}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="title omit">{{item.pano_name}}</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    @{
+        Html.RenderPartial("~/Views/Shared/_VueBase.cshtml");
+    }
+
+    <script type="text/javascript">
+        (function () {
+            var initData = @Html.Raw(JsonConvert.SerializeObject(ViewBag.PagedList))
+                initData = initData || {}
+
+            new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        page: 1,
+                        pageSize: 20,
+                        user_id: "@user.user_id",
+                        list: initData.list || [],
+                        total: initData.count || 0
+                    }
+                },
+                methods: {
+                    getList(page) {
+                        var self = this
+                        this.page = page || 1
+                        var data = {
+                            user_id: self.user_id,
+                            keyword: "",
+                            orderBy: ""
+                        }
+                        this.$service.getPanoList(this.page, this.pageSize, data, function (res) {
+                            var data = res.data
+                            self.list = data.list
+                            self.total = data.count
+                        })
+                    }
+                }
+            })
+        })();
+    </script>
+}

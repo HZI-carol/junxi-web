@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "全景案例";
+    ViewBag.Menu = "/pano";
+}
+@using Newtonsoft.Json
+
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/pano.css" />
+}
+
+<!-- banner-->
+<div class="module-banner">
+    <img src="/Content/images//pano/pano-banner.png" />
+    <h2>维构全景案例</h2>
+    <div class="search">
+        <div class="search-box">
+            <input placeholder="搜索关键字" id="author-search" v-model="keyword" /><i class="iconfont icon-sousuo" @@click="getList(1)"></i>
+        </div>
+        <div class="keyword">
+            <div class="title">热门关键字:</div>
+            <ul class="sub-cate">
+                @foreach (var key in WebConfigs.PanoHotKeywords)
+                {
+                    <li class="item"><a href="javascript:;" @@click="hotKeywordClick('@key')">@key</a></li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- content-->
+<section class="module-content">
+    <div class="wrapper">
+        <div class="pano"  v-cloak>
+            <!-- 全景案例-->
+            <ul class="category clearfix">
+                <li class="item" v-bind:class="selectTag.id == undefined ? 'active': ''">
+                    <div class="info">
+                        <a href="javascript:;" @@click="tagClick()">全部</a>
+                    </div>
+                </li>
+                <li class="item" v-for="tag in tagList" v-bind:key="tag.id" v-bind:class="(tag.id == selectTag.id || tag.id == selectTag.parentid) ? 'active': ''"
+                    @@click="tagClick(tag)">
+                    <div class="info">
+                        <a href="javascript:;" v-html="tag.text"></a>
+                    </div>
+                    <ul class="sub-cate clearfix">
+                        <li class="sub-item" v-for="child in tag.childtags" v-bind:class="selectTag.id == child.id ? 'active': ''">
+                            <a href="javascript:;" @@click="tagClick(child)" v-html="child.text"></a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <ul class="pano-list clearfix">
+                <li class="item" v-for="item in list" v-bind:key="item.pano_id">
+                    <a class="images-box" v-bind:href="item.panoview_url" target="_blank">
+                        <div class="cover"><img v-bind:src="item.icon_src" /></div>
+                        <div class="info">
+                            <div class="qrcode"><img v-bind:src="getqrcode(item)" /></div>
+                            <div class="count">
+                                <div class="praise"><i class="iconfont icon-qinziAPPtubiao-"></i><span v-html="item.praisecount"></span></div>
+                                <div class="views"><i class="iconfont icon-liulanliang"></i><span v-html="item.seecount"></span></div>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="buttom">
+                        <a class="title omit" v-bind:href="item.panoview_url" target="_blank" v-html="item.pano_name"></a>
+                        <div class="author">
+                            <i class="iconfont icon-zuozhe"></i><span>作者:</span>
+                            <a class="name omit" v-bind:href="detailPath + item.user_id" v-html="item.user_nickname"></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="module-pagination">
+                <el-pagination background layout="total, prev, pager, next" v-bind:total="total" v-bind:page-size="pageSize" v-bind:current-page="page"
+                               @@current-change="getList" v-if="total > 0">
+                </el-pagination>
+                <div class="no-data" v-if="total == 0">暂无数据</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script type="text/javascript" src="/Content/js/pages/pano.js"></script>
+    @{
+        Html.RenderPartial("~/Views/Shared/_VueBase.cshtml");
+        //详细页面路径
+        string detailPath = "/photographer/";
+        if (WebConfigs.IsHtmlSuffix)
+        {
+            detailPath = "/photographer-detail.html?id=";
+        }
+    }
+    <script type="text/x-template" id="anchored-heading-template">
+
+    </script>
+
+
+    <script type="text/javascript">
+        (function () {
+            var initData = @Html.Raw(JsonConvert.SerializeObject(ViewBag.PagedList))
+                initData = initData || {}
+            var tagData = @Html.Raw(JsonConvert.SerializeObject(ViewBag.Tags))
+                tagData = tagData || []
+
+            new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        detailPath: "@detailPath",
+                        page: 1,
+                        pageSize: 12,
+                        list: initData.list || [],
+                        total: initData.count || 0,
+                        tagList: tagData,
+                        selectTag: {},
+                        keyword: ""
+                    }
+                },
+                methods: {
+                    tagClick(tag) {
+                        tag = tag || {}
+                        if (!tag.childtags || tag.childtags.length <= 0) {
+                            this.selectTag = tag
+                            this.getList(1)
+                        }
+                    },
+                    hotKeywordClick(keyword) {
+                        this.keyword = keyword
+                        this.getList(1)
+                    },
+                    getqrcode (item) {
+                        if (item.panoview_url) {
+                            return "/common/qrcode?data=" + encodeURIComponent(item.panoview_url)
+                        }
+                        return ""
+                    },
+                    getList(page) {
+                        var self = this
+                        this.page = page || 1
+                        var data = {
+                            keyword: this.keyword,
+                            tag_id: self.selectTag.text || "",
+                            orderBy: ""
+                        }
+                        this.$service.getPanoList(this.page, this.pageSize, data, function (res) {
+                            var data = res.data
+                            self.list = data.list
+                            self.total = data.count
+                        })
+                    }
+                }
+            })
+        })();
+    </script>
+}

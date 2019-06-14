@@ -1,0 +1,67 @@
+﻿<footer class="module-footer">
+    <div class="wrapper">
+        <div class="logo"><img src="@WebConfigs.LogoUrl" /></div>
+        <div class="links">
+            <div class="section">
+                <div class="title">项目介绍</div>
+                <ul>
+                    <li class="links-item"><a href="/#product">项目介绍</a></li>
+                    <li class="links-item"><a href="/#profit">盈利模式</a></li>
+                    <li class="links-item"><a href="@WebConfigs.GetPagePath("/pano")">案例推荐</a></li>
+                </ul>
+            </div>
+            <div class="section">
+                <div class="title">新闻资讯</div>
+                <ul>
+                    <li class="links-item"><a href="@WebConfigs.GetPagePath("/news")">行业资讯</a></li>
+                    <li class="links-item"><a href="@WebConfigs.GetPagePath("/news")">全景知识</a></li>
+                    <li class="links-item"><a href="@WebConfigs.GetPagePath("/news")">公司动态</a></li>
+                </ul>
+            </div>
+            <div class="section">
+                <div class="title">合作共赢</div>
+                <ul>
+                    <li class="links-item"><a href="@WebConfigs.GetPagePath("/about")">关于我们</a></li>
+                    <li class="links-item"><a href="javascript:;">战略合作</a></li>
+                    <li class="links-item"><a href="@WebConfigs.GetPagePath("/about")">联系我们</a></li>
+                </ul>
+            </div>
+            <div class="section">
+                <div class="title">战略优势</div>
+                <div class="title"></div>
+                <ul>
+                    <li class="links-item"><a href="@WebConfigs.GetPagePath("/panomap")">全景地图</a></li>
+                    <li class="links-item"><a href="@WebConfigs.GetPagePath("/photographer")">摄影师</a></li>
+                    @*<li class="links-item"><a href="@WebConfigs.GetPagePath("/panomarket")">作品市场</a></li>*@
+                </ul>
+            </div>
+        </div>
+        <div class="qr-code">
+            <div class="follow qr-code-item"> <img src="/content/images/qrcode.png" /><span>扫一扫关注公众号</span></div>
+            <div class="concat qr-code-item"> <img src="/content/images/qrcode.png" /><span>扫扫联系客服微信</span></div>
+        </div>
+    </div>
+</footer>
+<div class="copy-right">@Html.Raw(WebConfigs.Config.common_page_footer)</div>
+
+<!-- sidebar-->
+<div class="module-sidebar">
+    <div class="qrcode options" title="二维码">
+        <i class="iconfont icon-erweima"></i>
+        <div class="qrcode-img hover-item">
+            <div class="item">
+                <img src="/content/images/qrcode.png" /><span class="title">微信客服</span>
+            </div>
+        </div>
+    </div>
+    @if (!string.IsNullOrEmpty(WebConfigs.Config.common_page_serviceqq))
+    {
+        <a class="qq options" href="http://wpa.qq.com/msgrd?v=3&amp;uin=@(WebConfigs.Config.common_page_serviceqq)&amp;site=qq&amp;menu=yes" title="联系qq">
+            <i class="iconfont icon-qq"></i>
+        </a>
+    }
+    <a class="telephone options" href="tel:@WebConfigs.Config.common_page_hotline" title="联系电话">
+        <i class="iconfont icon-dianhua11"></i>
+        <div class="tel-num hover-item"><span class="label">咨询热线</span><span class="num">@WebConfigs.Config.common_page_hotline</span></div>
+    </a><a class="go-top options" href="#" title="回到顶部"><i class="iconfont icon-top"></i></a>
+</div>

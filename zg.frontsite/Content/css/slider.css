@@ -1,0 +1,32 @@
+﻿.module-slider {
+    width: 100%;
+    overflow: hidden;
+    height: 700px;
+    position: relative;
+    background-color: #000;
+}
+
+    .module-slider .swiper-container {
+        height: 100%;
+        width: 100%;
+        position: relative;
+    }
+
+        .module-slider .swiper-container .swiper-wrapper {
+            width: 100%;
+        }
+
+            .module-slider .swiper-container .swiper-wrapper .swiper-slide {
+                width: 100%;
+                position: relative;
+                overflow: hidden;
+            }
+
+                .module-slider .swiper-container .swiper-wrapper .swiper-slide img {
+                    min-width: 1920px;
+                    position: absolute;
+                    left: 50%;
+                    -webkit-transform: translateX(-50%);
+                    -ms-transform: translateX(-50%);
+                    transform: translateX(-50%);
+                }

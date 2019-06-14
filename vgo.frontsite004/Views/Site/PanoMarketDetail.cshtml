@@ -1,0 +1,114 @@
+﻿@{
+    ViewBag.Title = "作品市场 - 作品详情";
+    ViewBag.Menu = "/panomarket";
+}
+@using Newtonsoft.Json
+@using vgo.frontsite004.Models
+
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/panomarket-detail.css" />
+}
+
+<!-- content-->
+<section class="module-content">
+    <div class="wrapper">
+        <div class="product-detail" v-cloak>
+            <div class="product-info">
+                <div class="product-img">
+                    @*<img v-bind:src="pano.full_icon_src" />*@
+                    <iframe style="width:755px; height: 100%; border : 0" v-bind:src="pano.panoview_url" ></iframe>
+                </div>
+                <div class="product-text">
+                    <h2 class="title">{{pano.name}}</h2>
+                    <div class="price"> <span>价格</span><span class="num">¥ {{pano.price}}</span></div>
+                    <ul class="info">
+                        <li class="item"><a href="javascript:;"><i class="iconfont icon-geren"></i><span>作者： {{pano.nickname}}</span></a></li>
+                        <li class="item"><a href="javascript:;"><i class="iconfont icon-dingwei"></i><span>地区： {{pano.pro}} {{pano.city}} {{pano.area}}</span></a></li>
+                        <li class="item"><a href="javascript:;"><i class="iconfont icon-paishe"></i><span>拍摄： {{pano.shoot_type_text}}</span></a></li>
+                        <li class="item"><a href="javascript:;"><i class="iconfont icon-icon_wangye"></i><span>分类： {{pano.pano_type_text}}</span></a></li>
+                    </ul>
+                    <a v-if="pano.has_buy" class="has-alreay-buy" href="javascript:;">已购买此作品</a>
+                    <a v-else class="add-to-carts" href="javascript:;" @@click="addCart(pano)">
+                        <i class="iconfont icon-cart"></i><span class="info">加入购物车</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 相似作品-->
+            <div class="similar-product">
+                <h2 class="title">相似作品</h2>
+                <ul class="pano-list"></ul>
+                <div style="line-height: 30px; font-size:16px; color:#9c0; text-align:center; padding-bottom: 20px;">
+                    暂无数据
+                </div>
+            </div>
+
+            <!-- 购物车模块 -->
+            <app-market-cart ref="cart" v-bind:user-id="user_id" v-bind:login-url="loginUrl" v-bind:detail-path="detailPath" v-bind:cart-list="cartList" @@getcartlist="getCartList">
+            </app-market-cart>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    @{
+        Html.RenderPartial("~/Views/Shared/_PanoMarketCart.cshtml");
+        //详细页面路径
+        string detailPath = "/panomarket/";
+        if (WebConfigs.IsHtmlSuffix)
+        {
+            detailPath = "/panomarket-detail.html?id=";
+        }
+        int user_id = 0;
+        if (ViewBag.User != null)
+        {
+            user_id = ViewBag.User.id;
+        }
+        string loginUrl = $"{WebConfigs.GetPagePath("/login")}?redirect={ WebConfigs.GetDetailPagePath("panomarket", ViewBag.Id)}";
+    }
+
+    <script type="text/javascript">
+        (function () {
+            var initData = @Html.Raw(JsonConvert.SerializeObject(Model))
+
+            new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        detailPath: "@detailPath",
+                        user_id: @user_id,
+                        loginUrl: "@loginUrl",
+                        pano: initData || {},
+                        cartList: []
+                    }
+                },
+                methods: {
+                    addCart(item) {
+                        var self = this
+                        if (this.user_id <= 0) {
+                            location.href = this.loginUrl
+                        } else if (item.fk_user_id == this.user_id) {
+                            this.$message.warning("不能购买自己的作品");
+                        } else if (this.cartList.some(function (data) { return data.fk_pano_id == item.fk_pano_id })) {
+                            self.$refs.cart.showCartDialog = true
+                        } else {
+                            self.$refs.cart.showCartDialog = true
+                            this.$service.addMarketCart(item.id, function (res) {
+                                self.getCartList()
+                            })
+                        }
+                    },
+                    getCartList() {
+                        var self = this
+                        this.$service.getMarketCartList(function (res) {
+                            self.cartList = res.data
+                            self.cartList.forEach(function (item) {
+                                self.$set(item, "isSelect", true)
+                            });
+                        })
+                    }
+                }
+            })
+        })();
+    </script>
+}

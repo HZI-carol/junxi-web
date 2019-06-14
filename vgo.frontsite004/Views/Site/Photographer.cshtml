@@ -1,0 +1,109 @@
+﻿@{
+    ViewBag.Title = "摄影师";
+    ViewBag.Menu = "/photographer";
+}
+@using Newtonsoft.Json
+@using vgo.frontsite004.Models
+
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/photographer.css" />
+}
+
+<!-- banner-->
+<div class="module-banner">
+    <img src="/content/images/photographer/photographer-banner1.png" />
+    <h2>@WebConfigs.Config.platname 优秀摄影师 全景摄影爱好者</h2>
+    <div class="search">
+        <div class="search-box">
+            <input placeholder="请输入关键字" id="author-search" v-model="keyword" /><i class="iconfont icon-sousuo" @@click="getList(1)"></i>
+        </div>
+    </div>
+</div>
+<!-- content-->
+<section class="module-content">
+    <div class="wrapper">
+        <div class="pootographer">
+            <!-- 摄影师-->
+            <div class="title-pootographer">
+                <h2>数百个摄影师入驻</h2>
+                <p class="omit">更多的人了解全景摄影，让更多的人认识到全景摄影的乐趣</p>
+            </div>
+            <ul class="pootographer-list clearfix" v-if="list && list.length > 0">
+                <li class="item" v-for="item in list" v-bind:key="item.user_id">
+                    <a class="link" v-bind:href="detailPath + item.user_id">
+                        <div class="avatar"><img v-bind:src="item.avatar" /></div>
+                        <div class="info">
+                            <div class="nickname omit">{{item.nickname}} </div>
+                            <div class="intro omit">{{getIntro(item)}}</div>
+                        </div>
+                        <div class="count">
+                            <div class="products omit">作品数:<span>{{item.panonum}}</span></div>
+                            <div class="praise omit">点赞数:<span>{{item.praisecount}}</span></div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+            <div class="module-pagination">
+                <el-pagination background layout="total, prev, pager, next" v-bind:total="total" v-bind:page-size="pageSize" v-bind:current-page="page"
+                               @@current-change="getList" v-if="total > 0">
+                </el-pagination>
+                <div class="no-data" v-if="total == 0">暂无数据</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script type="text/javascript" src="/Content/js/pages/photographer.js"></script>
+    @{
+        Html.RenderPartial("~/Views/Shared/_VueBase.cshtml");
+        //详细页面路径
+        string detailPath = "/photographer/";
+        if (WebConfigs.IsHtmlSuffix)
+        {
+            detailPath = "/photographer-detail.html?id=";
+        }
+    }
+
+    <script type="text/javascript">
+        (function () {
+            var initData = @Html.Raw(JsonConvert.SerializeObject(ViewBag.PagedList))
+                initData = initData || {}
+
+            new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        detailPath: "@detailPath",
+                        page: 1,
+                        pageSize: 12,
+                        list: initData.list || [],
+                        total: initData.count || 0,
+                        keyword: ""
+                    }
+                },
+                methods: {
+                    getIntro(item) {
+                        if (item.dec) {
+                            return item.dec.substring(0, 12)
+                        }
+                        return "";
+                    },
+                    getList(page) {
+                        var self = this
+                        this.page = page || 1
+                        var data = {
+                            keyword: this.keyword,
+                            orderBy: ""
+                        }
+                        this.$service.getUserList(this.page, this.pageSize, data, function (res) {
+                            var data = res.data
+                            self.list = data.list
+                            self.total = data.count
+                        })
+                    }
+                }
+            })
+        })();
+    </script>
+}

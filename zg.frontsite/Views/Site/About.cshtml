@@ -1,0 +1,201 @@
+﻿@{
+    ViewBag.Title = "关于我们";
+    ViewBag.Menu = "/about";
+}
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/about.css" />
+}
+@{
+    Html.RenderPartial("~/Views/Shared/_Banner.cshtml");
+}
+<!--关于我们 -->
+<div class="module-con con about">
+    <div class="wrap">
+        <div class="module-about-title">
+            关于我们
+        </div>
+        <b></b>
+        <div class="module-about-content">
+            <!-- 俊熙全景介绍 -->
+            <div class="module-about-one">
+                <ul>
+                    <li>
+                        <img src="/Content/images/ab1.png" alt="">
+                        <p>
+                            俊熙全景是利用3D全景技术与虚拟(VR)技术构建的具有独特优势的720°房产实景VR多终端服务平台，
+                            旨在为房产、装修、建材等行业提供VR全景采集、制作、发布、展示、管理的需求，
+                            是一套具备高操作性实用性的VR全景房产电商平台。
+                        </p>
+                    </li>
+                    <li>
+                        <p>
+                            通过俊熙全景平台可为装企、中介提供一个属于自己的内容展示营销工具，
+                            通过VR全景的沉浸式体验、超细节展示和互动式营销更好的为房产、装企做宣传，
+                            让消费者足不出户就可以线上找房、样板间，提升品牌信任和实际成单率！
+                        </p>
+                        <img src="/Content/images/ab2.png" alt="">
+                    </li>
+                </ul>
+            </div>
+            <!-- 宣传片 -->
+            <div class="module-about-two">
+                <img src="/Content/images/video.png" alt="">
+            </div>
+
+            <!-- 项目介绍 -->
+            <div class="module-about-three">
+                <div class="module-about-title">
+                    项目介绍：俊熙全景寻找装企入驻
+                </div>
+                <b></b>
+                <div class="module-about-content">
+                    <ul>
+                        <li>
+                            <div class="about-wrap">
+                                <div>
+                                    <i class="iconfont icon-jiejuefangan"></i>
+                                </div>
+                                <h5>一站式营销解决方案</h5>
+                                <p>
+                                    俊熙全景针对房产、装修、建材、中介等行业提供最新颖的线上展示体验，以身临其境完美逼真的交互式场景助力商企营销转化，
+                                    可将相关联的房源实景整理成为一套完整的VR全景展示作品，并运用多种营销插件、交互功能丰富房产营销场景内容。
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="about-wrap">
+                                <div>
+                                    <i class="iconfont icon-duoduan"></i>
+                                </div>
+                                <h5>多终端全景编辑器</h5>
+                                <p>
+                                    俊熙全景支持手机端或PC端编辑器制作全景作品，用户可随时随地地上传全景并进行高效编辑，
+                                    可视化操作界面简单清晰，可快速完成漫游信息、热点插件、视频图文、链接、语音解说等功能的编辑与制作，即刻发布分享。
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="about-wrap">
+                                <div>
+                                    <i class="iconfont icon-xiangji"></i>
+                                </div>
+                                <h5>理光拍摄设备支持</h5>
+                                <p>
+                                    俊熙全景将会配备入驻商企720°全景理光相机对现场房源、施工地实景进行VR全景图像采集，
+                                    作品制作完成后可形成离线文件进行多终端展示，也可形成二维码与连接对接微信或第三方平台。
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <!-- 功能模块 -->
+            <div class="module-about-four">
+                <div class="module-about-title">
+                    VR全景功能模块
+                </div>
+                <b></b>
+                <div class="module-about-content">
+                    <ul>
+                        <li><img src="/Content/images/about/system_ico1.png"><span>三维实景展示</span></li>
+                        <li><img src="/Content/images/about/system_ico3.png"><span>3D环物</span></li>
+                        <li><img src="/Content/images/about/system_ico5.png"><span>个性开场动画</span></li>
+                        <li><img src="/Content/images/about/system_ico18.png"><span>一键导览</span></li>
+                        <li><img src="/Content/images/about/system_ico10.png"><span>说一说功能</span></li>
+                        <li><img src="/Content/images/about/system_ico9.png"><span>VR模式</span></li>
+                        <li><img src="/Content/images/about/system_ico19.png"><span>地图导航</span></li>
+                        <li><img src="/Content/images/about/system_ico25.png"><span>作者信息展示</span></li>
+                        <li><img src="/Content/images/about/system_ico27.png"><span>多终端适配</span></li>
+                        <li><img src="/Content/images/about/system_ico29.png"><span>场景加密功能</span></li>
+                        <li><img src="/Content/images/about/system_ico32.png"><span>离线全景包</span></li>
+                        <li><img src="/Content/images/about/system_ico14.png"><span>文本、图片植入</span></li>
+                        <li><img src="/Content/images/about/system_ico21.png"><span>天气功能</span></li>
+                        <li><img src="/Content/images/about/system_ico23.png"><span>全景头部公告</span></li>
+                        <li><img src="/Content/images/about/system_ico16.png"><span>地面广告</span></li>
+                        <li><img src="/Content/images/about/system_ico3.png"><span>访问设置</span></li>
+                        <li><img src="/Content/images/about/system_ico12.png"><span>音乐、语音植入</span></li>
+                        <li><img src="/Content/images/about/system_ico36.png"><span>智能后台管理系统</span></li>
+                    </ul>
+                </div>
+            </div>
+            <!-- 万千企业 -->
+            <div class="module-about-five">
+                <div class="module-about-title">
+                    万千企业正在使用俊熙全景VR系统
+                </div>
+                <b></b>
+                <div class="module-about-content">
+                    <ul>
+                        <li><img src="/Content/images/about/cjzs.png" alt=""></li>
+                        <li><img src="/Content/images/about/dxzs.png" alt=""></li>
+                        <li><img src="/Content/images/about/dyzs.png" alt=""></li>
+                        <li><img src="/Content/images/about/gdzs.png" alt=""></li>
+                        <li><img src="/Content/images/about/hxpwzs.png" alt=""></li>
+                        <li><img src="/Content/images/about/jdzs.png" alt=""></li>
+                        <li><img src="/Content/images/about/lbzs.png" alt=""></li>
+                        <li><img src="/Content/images/about/lfzs.png" alt=""></li>
+                        <li><img src="/Content/images/about/mjzs.png" alt=""></li>
+                        <li><img src="/Content/images/about/yszs.png" alt=""></li>
+                        <li><img src="/Content/images/about/11.png" alt=""></li>
+                        <li><img src="/Content/images/about/12.png" alt=""></li>
+                        <li><img src="/Content/images/about/13.png" alt=""></li>
+                        <li><img src="/Content/images/about/cjzs.png" alt=""></li>
+                    </ul>
+                </div>
+            </div>
+            <!--申请合作 -->
+            <div class="module-about-six">
+                <div class="module-about-title">
+                    申请合作
+                </div>
+                <b></b>
+                <div class="module-about-content">
+                    <h5>距离您进入VR全景只有<span>“五步之遥”</span></h5>
+                    <ul>
+                        <li>
+                            <div class="partner-img"></div>
+                            <i>1</i>
+                            <span>洽谈</span>
+                        </li>
+                        <li>
+                            <div class="partner-img"></div>
+                            <i>2</i>
+                            <span>签约</span>
+                        </li>
+                        <li>
+                            <div class="partner-img"></div>
+                            <i>3</i>
+                            <span>开通会员套餐</span>
+                        </li>
+                        <li>
+                            <div class="partner-img"></div>
+                            <i>4</i>
+                            <span>颁发授权</span>
+                        </li>
+                        <li>
+                            <div class="partner-img"></div>
+                            <i>5</i>
+                            <span>正式成为俊熙全景合作商</span>
+                        </li>
+                    </ul>
+                    <b></b>
+                </div>
+            </div>
+            <!--进入全景VR -->
+            @*<div class="module-about-seven">
+                    <div class="module-about-title">
+                        <h3>现在进入全景VR行业</h3>
+                        <i class="iconfont icon-dbarrow-down"></i>
+                    </div>
+                    <div class="module-about-content">
+                        <input type="text" placeholder="真实姓名"><br>
+                        <input type="text" placeholder="联系电话">
+                    </div>
+                </div>*@
+        </div>
+
+    </div>
+</div>
+
+<script type="text/javascript" src="/Content/js/pages/index.js"></script>

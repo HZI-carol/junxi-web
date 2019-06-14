@@ -1,0 +1,240 @@
+.module-content {
+    width: 100%;
+    overflow: hidden;
+}
+
+    .module-content > .wrapper {
+        width: 1200px;
+        margin: 0 auto;
+    }
+
+        .module-content > .wrapper .product-detail {
+            width: 100%;
+            margin-top: 90px;
+        }
+
+            .module-content > .wrapper .product-detail .bread-crumbs {
+                line-height: 60px;
+                font-size: 16px;
+                margin-bottom: 20px;
+            }
+
+                .module-content > .wrapper .product-detail .bread-crumbs .parent {
+                    color: #00a0e9;
+                }
+
+                .module-content > .wrapper .product-detail .bread-crumbs .current {
+                    color: #333;
+                }
+
+.product-info {
+    height: 535px;
+}
+
+    .product-info .product-img {
+        height: 100%;
+        width: 755px;
+        float: left;
+    }
+
+        .product-info .product-img img {
+            width: 100%;
+            height: 100%;
+        }
+
+    .product-info .product-text {
+        float: right;
+        height: 100%;
+        padding-left: 56px;
+        width: 445px;
+        position: relative;
+    }
+
+        .product-info .product-text .title {
+            font-size: 30px;
+            color: #333;
+            margin-bottom: 25px;
+        }
+
+        .product-info .product-text .price {
+            margin-bottom: 45px;
+        }
+
+            .product-info .product-text .price span {
+                color: #666;
+                font-size: 14px;
+                margin-right: 10px;
+            }
+
+            .product-info .product-text .price .num {
+                color: #f00;
+                font-size: 30px;
+            }
+
+        .product-info .product-text .info .item {
+            margin-bottom: 30px;
+        }
+
+            .product-info .product-text .info .item a i.iconfont {
+                color: #999;
+                margin-right: 10px;
+            }
+
+            .product-info .product-text .info .item a span {
+                color: #333;
+                font-size: 16px;
+            }
+
+        .product-info .product-text .has-alreay-buy {
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 56px;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            width: 182px;
+            border-radius: 2px;
+            background-color: #F56C6C;
+            color: #fff;
+        }
+
+        .product-info .product-text .add-to-carts {
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 56px;
+            text-align: center;
+            height: 40px;
+            line-height: 40px;
+            width: 182px;
+            border-radius: 2px;
+            background-color: #bde14f;
+        }
+
+            .product-info .product-text .add-to-carts:hover {
+                background-color: #cddc39;
+            }
+
+            .product-info .product-text .add-to-carts i {
+                color: #fff;
+                font-size: 20px;
+            }
+
+            .product-info .product-text .add-to-carts span {
+                margin-left: 5px;
+                font-size: 16px;
+                color: #fff;
+            }
+
+.similar-product {
+    margin-top: 20px;
+}
+
+    .similar-product .title {
+        font-size: 26px;
+        line-height: 80px;
+        color: #333;
+    }
+
+    .similar-product .pano-list .item {
+        overflow: hidden;
+        float: left;
+        width: 275px;
+        height: 320px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        box-shadow: 0 0 5px rgba(0,0,0,0.1);
+        margin-right: 32px;
+        margin-bottom: 31px;
+        position: relative;
+    }
+
+        .similar-product .pano-list .item:nth-child(4n) {
+            margin-right: 0;
+        }
+
+        .similar-product .pano-list .item:hover .buttom .title {
+            color: #9c0;
+        }
+
+        .similar-product .pano-list .item:hover .top .img {
+            opacity: 1;
+            z-index: 1;
+            -webkit-transform: translate3d(0, 0, 0) rotateX(0) rotateY(0) rotateZ(0) scale(1);
+            transform: translate3d(0, 0, 0) rotateX(0) rotateY(0) rotateZ(0) scale(1);
+        }
+
+        .similar-product .pano-list .item .top {
+            height: 278px;
+            width: 100%;
+            position: relative;
+        }
+
+            .similar-product .pano-list .item .top .img {
+                height: 100%;
+                width: 100%;
+                overflow: hidden;
+            }
+
+                .similar-product .pano-list .item .top .img:hover img {
+                    -webkit-transform: scale(1.3);
+                    -ms-transform: scale(1.3);
+                    transform: scale(1.3);
+                }
+
+                .similar-product .pano-list .item .top .img img {
+                    width: 100%;
+                    height: 100%;
+                    -webkit-transition: all 2s;
+                    -o-transition: all 2s;
+                    transition: all 2s;
+                }
+
+            .similar-product .pano-list .item .top .view {
+                cursor: pointer;
+                color: #666;
+                top: 10px;
+                right: 10px;
+                position: absolute;
+                text-shadow: 0 0 10px #fff;
+            }
+
+                .similar-product .pano-list .item .top .view:hover {
+                    color: #9c0;
+                }
+
+        .similar-product .pano-list .item .bottom {
+            height: 40px;
+            width: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-pack: distribute;
+            justify-content: space-around;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+        }
+
+            .similar-product .pano-list .item .bottom .title {
+                font-size: 16px;
+                color: #666;
+                padding-left: 10px;
+            }
+
+                .similar-product .pano-list .item .bottom .title:hover {
+                    color: #9c0;
+                }

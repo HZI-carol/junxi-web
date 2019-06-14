@@ -1,0 +1,121 @@
+﻿@{
+    ViewBag.Title = "新闻资讯";
+    ViewBag.Menu = "/news";
+}
+
+@using Newtonsoft.Json
+@using zg.frontsite
+
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/news.css" />
+}
+
+@{
+    Html.RenderPartial("~/Views/Shared/_Banner.cshtml");
+}
+<!-- 新闻资讯 -->
+<div class="module-con con news">
+    <div class="wrap" v-cloak>
+        <div class="module-news-selector">
+            <ul>
+                @if (ViewBag.TypeList != null)
+                {
+                    foreach (NewsType type in ViewBag.TypeList)
+                    {
+                        <li><a class="button" v-bind:class="type_id == @type.id ? 'active': ''" @@click="typeClick(@type.id)">@type.name</a></li>
+                    }
+                }
+            </ul>
+        </div>
+        <b></b>
+        <div class="module-news-content" v-for="item in list" v-bind:key="item.id">
+            <a v-bind:href="detailPath + item.id" target="_blank"><img v-bind:src="item.full_cover_url" alt="" /></a>
+            <div class="module-company-text">
+                <div class="text-t">
+                    <div class="text-company">
+                        <h4><a v-bind:href="detailPath + item.id" target="_blank">{{item.title}}</a></h4>
+                        <span>{{item.created | dateFilter}}</span>
+                    </div>
+                    <span> {{item.summary}}</span>
+                </div>
+                <div class="text-c">
+                    <div class="text-left">
+                        <i class="iconfont icon-usercenter"></i>
+                        <div>
+                            <span>{{item.author}}</span>
+                            <i class="iconfont icon-v"></i>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <ul>
+                            <li>
+                                <i class="iconfont icon-yuedu"></i>
+                                <span>{{item.seecount}}</span>
+                            </li>
+                            <li>
+                                <i class="iconfont icon-dianzan1"></i>
+                                <span>{{item.praisecount}}</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="module-pagination">
+            <el-pagination background layout="total, prev, pager, next" v-bind:total="total" v-bind:page-size="pageSize" v-bind:current-page="page"
+                           @@current-change="getList" v-if="total > 0">
+            </el-pagination>
+            <div class="no-data" v-if="total == 0">暂无数据</div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts {
+    @{
+        Html.RenderPartial("~/Views/Shared/_VueBase.cshtml");
+        //详细页面路径
+        string detailPath = "/news/";
+    }
+    <script type="text/javascript">
+        (function () {
+            var initData = @Html.Raw(JsonConvert.SerializeObject(ViewBag.PagedList))
+                initData = initData || {}
+
+            new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        detailPath: "@detailPath",
+                        page: 1,
+                        pageSize: 6,
+                        list: initData.list || [],
+                        total: initData.count || 0,
+                        type_id: "@ViewBag.type_id"
+                    }
+                },
+                methods: {
+                    typeClick(id) {
+                        this.type_id = id
+                        this.getList(1)
+                    },
+                    getList(page) {
+                        var self = this
+                        this.page = page || 1
+                        var data = {
+                            type_id: this.type_id,
+                            orderBy: ""
+                        }
+                        this.$service.getNewsList(this.page, this.pageSize, data, function (res) {
+                            var data = res.data
+                            self.list = data.list
+                            self.total = data.count
+                        })
+                    }
+                }
+            })
+        })();
+    </script>
+
+    <script type="text/javascript" src="/Content/js/pages/news.js"></script>
+}

@@ -1,0 +1,147 @@
+@charset 'UTF-8';
+/* 装企公司 */
+.banner>img{
+  width: 100%;
+}
+.company{
+  
+}
+.module-con .wrap{
+  
+}
+.module-con .wrap b  {
+  display: block;
+  height: 1px;
+  background-color: #CFCFCF;
+}
+.module-con .wrap .module-company-selector{
+  display: flex;
+  justify-content: space-between;
+  max-width: 1220px;
+  margin:30px auto 0;
+  font-size: 16px;
+  color:#616161;
+  font-weight: bold;
+}
+
+.module-con .wrap .module-company-selector .module-company span{
+  display:inline-block;
+  height:37px ;
+  margin-right: 70px;
+  /* border:1px solid transparent; */
+  box-sizing: border-box;
+  /* background-color: #CFCFCF; */
+}
+.module-con .wrap .module-company .active{
+  color:#D7141A;
+  cursor: pointer;
+  border-bottom:2px solid #000;
+}
+.module-con .wrap .module-company-selector .module-company span:hover{
+  color:#D7141A;
+  cursor: pointer;
+  border-bottom:2px solid #000;
+}
+.module-con .wrap .module-company-selector .module-province{
+  border:none;
+  font-size: 16px;
+  color:#666;
+  font-weight: bold;
+  cursor: pointer;
+}
+/* .module-con .wrap .module-company-selector .module-province>i{
+  color:#616161;
+}
+.module-con .wrap .module-company-selector .module-province:hover i{
+  color:#D7141A;
+} */
+.module-con .wrap .module-company-content{
+  width: 1230px;
+  margin:0 auto;
+  padding: 46px 0;
+  border-bottom:1px solid #CFCFCF;
+  
+}
+.module-con .wrap .module-company-content .content-logo{
+  display: inline-block;
+  width: 125px;
+  height: 125px;
+  background-position: center;
+  /* border:1px solid #616161; */
+  border-radius: 50%;
+  vertical-align: bottom;
+}
+.module-con .wrap .module-company-content .content-logo img{
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+}
+.module-con .wrap .module-company-content .module-company-text{
+  display: inline-block;
+  width: 642px;
+  color:#666;
+  text-align: left;
+  margin-left: 20px;
+}
+.module-con .wrap .module-company-content .module-company-text .text-t{
+font-size: 16px;
+color:#000;
+}
+.module-con .wrap .module-company-content .module-company-text .text-c{
+  margin:8px 0 10px;
+  }
+
+.module-con .wrap .module-company-content .module-company-text .text-c ul li{
+  display:inline-block;
+  margin-right: 10px;
+  font-size: 16px;
+}
+.module-con .wrap .module-company-content .module-company-text .text-t>i{
+  color:#F5C025;
+  vertical-align: bottom;
+  font-size: 20px;
+}
+.module-con .wrap .module-company-content .module-company-text .text-c ul li i{
+  font-size: 18px;
+  color:#666;
+}
+.module-con .wrap .module-company-content .module-company-text>span{
+  line-height: 25px;
+  font-size: 14px;
+  }
+.module-con .wrap .module-company-content .module-company-text h4{
+  display:inline-block;
+}
+.module-con .wrap .module-company-content .module-company-show{
+  float: right;
+}
+.module-con .wrap .module-company-content .module-company-show ul li{
+ display:inline-block;
+ margin-left:8px;
+}
+.module-con .wrap .module-company-content .module-company-show ul li img{
+  width: 120px;
+  height: 120px;
+ }
+.module-con .wrap .module-con-pages ul{
+  text-align: center;
+  margin: 30px 0;
+}
+.module-con .wrap .module-con-pages ul li{
+  display: inline-block;
+  /* width: 134px;
+  line-height: 42px; */
+  padding: 20px;
+  line-height: 12px;
+  color:#333;
+  border: 1px solid #CFCFCF;
+  border-radius: 3px;
+  text-align: center;
+  font-size: 16px;
+  margin-right:10px;
+  
+}
+.module-con .wrap .module-con-pages ul li:hover{
+  background-color:#D7141A;
+  color:#fff;
+}

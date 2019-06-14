@@ -1,0 +1,368 @@
+
+/*公共样式*/
+.wrap {
+    /* width: 1200px; */
+    height: auto;
+    margin: 0;
+}
+/* .bg {
+  background: #f5f5f5 !important;
+} */
+.iconfont {
+    color: #D7141A;
+    font-size: 25px;
+    vertical-align: middle;
+}
+/* 轮播 */
+.swiper-pagination-bullet {
+    width: 16px !important;
+    height: 16px !important;
+    display: inline-block;
+    border-radius: 100%;
+    background: #fff !important;
+    opacity: 1 !important;
+    cursor: pointer;
+}
+
+.swiper-pagination-bullet-active {
+    width: 22px !important;
+    border-radius: 10px !important;
+    opacity: 1;
+    background: #000 !important;
+    cursor: pointer;
+}
+
+
+#swiper1-button-prev {
+    width: 65px;
+    height: 65px;
+    left: 2%;
+    transition: 0.2s;
+    background-color: #fff;
+    border-radius: 50%;
+    background-position: center;
+    background-size: 34%;
+    transition:all, .8s;
+    opacity: 0;
+
+}
+#swiper1-button-next {
+    width: 65px;
+    height: 65px;
+    right: 2%;
+    border-radius: 50%;
+    background-color: #fff;
+    background-position: center;
+    background-size: 34%;
+    transition: 0.2s;
+    transition:all, .8s;
+    opacity: 0;
+}
+#swiper1:hover .swiper-button-prev,#swiper1:hover .swiper-button-next{
+    opacity: .5;
+  }
+/* 轮播搜索框 */
+.banner {
+    position: relative;
+    height: 610px;
+    overflow: hidden;
+}
+
+    .banner > .find {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 50%;
+        width: 580px;
+        /* height: 60px; */
+        margin: auto;
+        /* background: #ddd; */
+        z-index: 2;
+    }
+
+        .banner > .find .find-input {
+            width: 100%;
+            height: 40px;
+            line-height: 50px;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 1px 2px 10px rgba(0,0,0,0.5);
+        }
+
+            .banner > .find .find-input input {
+                float: left;
+                width: 515px;
+                height: 40px;
+                padding-left: 15px;
+                overflow: hidden;
+                background-color: rgba(255,255,255,0.5);
+                font-size: 16px;
+            }
+
+            .banner > .find .find-input .iconfont {
+                float: right;
+                width: 50px;
+                height: 100%;
+                line-height: 40px;
+                text-align: center;
+                background-color: #D7141A;
+                color: #fff;
+                font-size: 26px;
+                vertical-align: middle;
+                cursor: pointer;
+            }
+
+        .banner > .find .find-keyword {
+            color: #fff;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+
+            .banner > .find .find-keyword ul {
+                display: inline-block;
+            }
+
+                .banner > .find .find-keyword ul li {
+                    display: inline-block;
+                    height: 20px;
+                    color: #D7141A;
+                    font-size: 14px;
+                    text-shadow: 2px -2px 4px #666;
+                    /* border-right:1px solid #D7141A; */
+                }
+
+                    .banner > .find .find-keyword ul li > b {
+                        display: inline-block;
+                        width: 1px;
+                        height: 10px;
+                        background-color: #D7141A;
+                    }
+
+.header-top {
+    width: 100%;
+    min-width: 1236px;
+    height: 64px;
+    line-height: 64px;
+    background: #101010;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+    opacity: 1;
+}
+
+    .header-top .head-logo {
+        display: inline-block;
+        margin-left: 50px;
+        cursor: pointer;
+    }
+
+
+        .header-top .head-logo img {
+            width: 150px;
+        }
+
+    .header-top .head-menu {
+        float: right;
+        margin-right: 160px;
+    }
+
+        .header-top .head-menu ul {
+            display: flex;
+        }
+
+            .header-top .head-menu ul li {
+                float: left;
+                min-width: 150px;
+                height: 100%;
+                cursor: pointer;
+                text-align: center;
+                box-sizing: border-box;
+                margin-right: 10px;
+            }
+
+                .header-top .head-menu ul li:hover {
+                    background-color: #D7141A;
+                }
+
+                .header-top .head-menu ul li a {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
+
+    .header-top ul li a {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 700;
+    }
+
+#swiper1 .swiper-slide img {
+    /* width: 100%; */
+    /* height: 480px; */
+}
+
+.header-top .head-menu > ul > li > a {
+    text-align: center;
+}
+
+.header-top .head-menu ul li ul {
+    display: none;
+}
+
+.header-top .head-menu .active {
+    background-color: #D7141A;
+}
+
+.header-top .head-register {
+    float: right;
+    width: calc((100% - 1200px) * 0.5);
+    min-width: 260px;
+    height: 100%;
+    color: #fff;
+}
+
+    .header-top .head-register ul {
+        /* display: flex; */
+        line-height: 67px;
+    }
+
+        .header-top .head-register ul li {
+            float: left;
+            min-width: 40px;
+            padding: 0 18px;
+            cursor: pointer;
+            text-align: center;
+            box-sizing: border-box;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+            .header-top .head-register ul li:nth-child(1) a {
+                margin-left: 5px;
+            }
+
+            .header-top .head-register ul li a:hover {
+                color: #D7141A;
+            }
+
+.module-banner {
+    position: relative;
+    width: 100%;
+    height: 480px;
+    overflow: hidden;
+}
+
+    .module-banner .swiper-container {
+        overflow: hidden;
+    }
+
+@media screen and (max-width: 1540px) {
+    .header-top .head-menu ul li {
+        min-width: 100px;
+    }
+    .header-top .head-menu  {
+        margin-right: 50px;
+    }
+}
+
+@media screen and (max-width: 1600px) {
+    .header-top .head-menu  {
+        margin-right: 100px;
+    }
+
+}
+.header-top .register {
+    position: relative;    
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    height: 100%;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    position: relative;
+}
+
+.header-top .head-register ul .register > ul {
+    position: absolute;
+    top: 60px;
+    left: 70px;
+    width: 150px;
+    text-align: center;
+    -webkit-transform: translateY(-252px);
+    -ms-transform: translateY(-252px);
+    transform: translateY(-252px);
+    -webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+    transition: all 0.5s;
+    opacity: 0;
+
+}
+
+.header-top .head-register ul .register:hover  ul {
+    opacity: 1;
+    -webkit-transform: translateY(0px);
+    -ms-transform: translateY(0);
+    transform: translateY(0px);
+}
+.register > ul > li {
+    line-height: 40px;
+    height: 40px;
+    background-color: rgba(0,0,0,0.8);
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.header-top .head-register ul .register > ul li:nth-child(1) {
+    border-radius: 2px 2px 0 0;
+}
+
+.header-top .head-register ul .register > ul li:last-child {
+    border-radius: 0 0 2px 2px;
+    border: none;
+}
+
+.header-top .head-register ul .register > ul li:hover {
+    background: #D7141A;
+}
+
+.header-top .head-register ul .register > ul li a {
+    font-size: 14px;
+    color: #fff;
+    font-weight: normal;
+}
+
+   
+
+    .register .avatar>img{
+        width: 40px;
+        height: 40px;
+        border: 1px solid #fff;
+        vertical-align: middle;
+        border-radius: 50%;
+        
+    }
+    .register .nickname{
+       position: relative;
+       font-size: 16px;
+        color: #fff;
+        padding: 0 20px 0 10px;
+        /* width: 120px; */
+        z-index: 999;
+        font-weight: normal;
+    }
+.header-top .head-register > ul  .register .nickname::after {
+    content: " ";
+    position: absolute;
+    right: 0;
+    top: 43%;
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 8px solid #fff;
+    transition: all .5s;
+}
+.header-top .head-register ul .register:hover .nickname::after {
+    transform: rotateZ(180deg);
+}

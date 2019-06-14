@@ -1,0 +1,210 @@
+﻿@{
+    ViewBag.Title = "摄影师详情";
+    ViewBag.Menu = "/photographer";
+}
+@using Newtonsoft.Json
+@{ 
+    var user = Model as vgo.partner.frontsite.Models.User;
+}
+
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/photographer-detail.css" />
+}
+
+<!-- banner-->
+<div class="module-banner" style="height:500px">
+    <img src="/content/images/photographer/photographer-banner2.png" />
+    <h2>摄影师作品 摄影师详情</h2>
+</div>
+<!-- content-->
+<section class="module-content">
+    <div class="wrapper">
+        <div class="pootographer-detail" v-cloak>
+            <!-- 摄影师详情-->
+            <div class="pootographer-info">
+                <div class="avatar"><img src="@user.avatar" /></div>
+                <div class="detail">
+                    <div class="top">
+                        <div class="nickname omit">@user.nickname</div>
+                        <div class="profile-button">个人资料</div>
+                    </div>
+                    <div class="bottom">
+                        <div class="products omit">作品:<span class="num omit">@user.panonum</span></div>
+                        <div class="popularity omit">人气:<span class="num omit">@user.seecount</span></div>
+                        <div class="praise omit">赞:<span class="num omit">@user.praisecount</span></div>
+                        <div class="intro omit">简介：@user.dec</div>
+                    </div>
+                </div><a class="appointment-button" href="javascript:;">在线预约</a>
+            </div>
+            <div class="title-pootographer-detail">
+                <h2>全景作品</h2>
+            </div>
+            <!-- 作品列表-->
+            <ul class="products-list clearfix">
+                <li class="item" v-for="item in list" v-bind:key="item.pano_id">
+                    <a class="link" v-bind:href="item.panoview_url" target="_blank">
+                        <div class="images-box">
+                            <div class="cover"><img v-bind:src="item.icon_src" /></div>
+                            <div class="info">
+                                <div class="qrcode"><img v-bind:src="getqrcode(item)" /></div>
+                                <div class="count">
+                                    <div class="praise"><i class="iconfont icon-qinziAPPtubiao-"></i><span>{{item.seecount}}</span></div>
+                                    <div class="views"><i class="iconfont icon-liulanliang"></i><span>{{item.praisecount}}</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="title omit">{{item.pano_name}}</div>
+                    </a>
+                </li>
+            </ul>
+            <!-- 分页-->
+            <div class="module-pagination">
+                <el-pagination background layout="total, prev, pager, next" v-bind:total="total" v-bind:page-size="pageSize" v-bind:current-page="page"
+                               @@current-change="getList" v-if="total > 0">
+                </el-pagination>
+                <div style="padding:10px; color:#409eff; font-size: 15px;" v-if="total == 0">暂无数据</div>
+            </div>
+
+            <!-- 详情对话框-->
+            <div class="detail-dialog">
+                <div class="content">
+                    <div class="close-dialog">×</div>
+                    <div class="content-box">
+                        <div class="left">
+                            <div class="avatar"><img src="@user.avatar" /></div>
+                            <div class="nickname">@user.nickname</div>
+                            <div class="count">
+                                <div class="products omit">作品: <span class="omit">@user.panonum</span></div>
+                                <div class="views omit">人气: <span class="omit">@user.seecount</span></div>
+                            </div>
+                        </div>
+                        <div class="right">
+                            <div class="title">个人资料</div>
+                            <div class="nickname omit">昵称: @user.nickname</div>
+                            <div class="addr">现居: @user.areatext</div>
+                            <div class="intro omit4">简介：@user.dec</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 约拍对话框-->
+            <div class="appoint-dialog">
+                <div class="content">
+                    <div class="close-dialog">×</div>
+                    <div class="content-box">
+                        <div class="top">
+                            <div class="avatar"><img src="@user.avatar" /></div>
+                            <div class="nickname">@user.nickname</div>
+                            <div class="count">
+                                <div class="products omit">作品：<span class="omit">@user.panonum</span></div>
+                                <div class="views omit">人气：<span class="omit">@user.seecount</span></div>
+                                <div class="praise omit">赞：<span class="omit">@user.praisecount</span></div>
+                            </div>
+                        </div>
+                        <div class="bottom">
+                            <div class="from">
+                                <div class="item naem">
+                                    <label>姓名</label>
+                                    <input placeholder="请输入个人姓名" v-model="task.personname" maxlength="20" />
+                                </div>
+                                <div class="item tel">
+                                    <label>联系方式</label>
+                                    <input placeholder="请输入联系方式" v-model="task.contact" maxlength="30" />
+                                </div>
+                                <div class="item appoint-info">
+                                    <label>约拍内容</label>
+                                    <textarea placeholder="请输入约拍内容" v-model="task.content" maxlength="500"></textarea>
+                                </div>
+                                <input class="submit" type="button" value="提交约拍" @@click="addPanoTask" />
+                            </div>
+                            <div class="tip"><img src="/content/images/photographer/组27.png" /></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script type="text/javascript" src="/Content/js/pages/photographer-detail.js"></script>
+    @{
+        Html.RenderPartial("~/Views/Shared/_VueBase.cshtml");
+    }
+
+    <script type="text/javascript">
+        (function () {
+            var initData = @Html.Raw(JsonConvert.SerializeObject(ViewBag.PagedList))
+                initData = initData || {}
+
+            new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        page: 1,
+                        pageSize: 12,
+                        user_id: "@user.user_id",
+                        list: initData.list || [],
+                        total: initData.count || 0,
+                        task: {
+                            fk_user_id: "@user.user_id",
+                            personname: "",
+                            contact: "",
+                            content: ""
+                        }
+                    }
+                },
+                methods: {
+                    getqrcode(item) {
+                        if (item.panoview_url) {
+                            return "/common/qrcode?data=" + encodeURIComponent(item.panoview_url)
+                        }
+                        return ""
+                    },
+                    getList(page) {
+                        var self = this
+                        this.page = page || 1
+                        var data = {
+                            user_id: self.user_id,
+                            keyword: "",
+                            orderBy: ""
+                        }
+                        this.$service.getPanoList(this.page, this.pageSize, data, function (res) {
+                            var data = res.data
+                            self.list = data.list
+                            self.total = data.count
+                        })
+                    },
+                    addPanoTask() {
+                        var self = this
+                        if (!this.task.personname) {
+                            this.$message.error("联系人姓名不能为空")
+                            return
+                        }
+                        if (!this.task.contact) {
+                            this.$message.error("联系方式不能为空")
+                            return
+                        }
+                        if (!this.task.content) {
+                            this.$message.error("约拍内容不能为空")
+                            return
+                        }
+                        this.$service.addPanoTask(this.task, function (res) {
+                            self.$message.success("提交成功，我们会尽快联系您的！");
+                            self.task = {
+                                fk_user_id: self.user_id,
+                                personname: "",
+                                contact: "",
+                                content: ""
+                            }
+                            //关闭弹窗
+                            $('.appoint-dialog').fadeOut()
+                        })
+                    }
+                }
+            })
+        })();
+    </script>
+}

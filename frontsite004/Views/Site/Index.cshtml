@@ -1,0 +1,498 @@
+﻿@{
+    ViewBag.Title = WebConfigs.Config.platname;
+    ViewBag.Menu = "/";
+}
+@using vgo.frontsite004.Models
+
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/index.css" />
+}
+
+<div class="layout home-tpl-1">
+    <div class="module-slider">
+        <div class="swiper-container">
+            <div class="swiper-wrapper">
+                <a class="swiper-slide" href="javascript:;"><img src="/Content/images/index/banner.jpg" /></a>
+                <a class="swiper-slide" href="javascript:;"><img src="/Content/images/index/banner1.jpg" /></a>
+                <a class="swiper-slide" href="javascript:;"><img src="/Content/images/index/banner2.jpg" /></a>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+    <div class="row panolist">
+        <div class="wrapper">
+            <div class="r-title">
+                <h2>精彩世界 全景展示</h2>
+                <div class="sub-title">所看即所得，无需到现场，即可犹如身临其境，全方位，线上720°旋转实景展示</div>
+            </div>
+            <div class="content">
+                <ul class="pano-list clearfix">
+                    @if (ViewBag.List != null)
+                    {
+                        foreach (Pano item in ViewBag.List)
+                        {
+                            <li class="item">
+                                <a class="images-box" href="@item.panoview_url" target="_blank">
+                                    <div class="cover"><img src="@item.icon_src" /></div>
+                                    <div class="info">
+                                        <div class="qrcode"><img src="@("/common/qrcode?data=" + HttpUtility.UrlEncode(item.panoview_url))" /></div>
+                                        <div class="count">
+                                            <div class="praise"><i class="iconfont icon-qinziAPPtubiao-"></i><span>@item.praisecount</span></div>
+                                            <div class="views"><i class="iconfont icon-liulanliang"></i><span>@item.seecount</span></div>
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="buttom">
+                                    <a class="title omit" href="@item.panoview_url" target="_blank">@item.pano_name</a>
+                                    <div class="author">
+                                        <i class="iconfont icon-zuozhe"></i><span>作者:</span>
+                                        <a class="name omit" href="@(WebConfigs.GetDetailPagePath("photographer", item.user_id))">@item.user_nickname</a>
+                                    </div>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row services">
+        <div class="wrapper">
+            <div class="r-title">
+                <h2>我们的服务</h2>
+                <div class="sub-title">10多种行业插件、20多种营销插件、40+VR全景交互功能，倾听用户需求，让用户有不一样的体验</div>
+                <h3>打造集全景展示、营销转化、线上购物于一体的全景漫游互动系统</h3>
+            </div>
+            <div class="content clearfix">
+                <div class="item video-frame">
+                    <div class="wrap">
+                        <div class="contain">
+                        </div>
+                        <div class="video-play" id="playBtn"></div>
+                    </div>
+                </div>
+                <div class="info-list fr">
+                    <div class="info-list-item clearfix">
+                        <span class="icon"><img src="/content/images/index/serve_vr.png" alt=""></span>
+                        <span class="num">1</span> <span class="text-wrap">
+                            <div class="item-title">VR全景拍摄</div>
+                            <p class="item-desc">提供稳定的VR全景系统与功能强大的全景编辑器、航拍全景、地面全景、全景漫游制作及全景内营销模板搭建，实现720°无死角，细节完美展现，将现实世界真实还原到互联网上。</p>
+                        </span>
+                    </div>
+                    <div class="info-list-item clearfix">
+                        <span class="icon"><img src="/content/images/index/serve_sp.png" alt=""></span>
+                        <span class="num">2</span> <span class="text-wrap">
+                            <div class="item-title">VR视频制作</div>
+                            <p class="item-desc">提供VR视频专业拍摄，技术先进、创意新颖，完整还原真实环境的动态过程，让VR全景世界更生动，在互联网上多角度体验世界，让真实更极致！</p>
+                        </span>
+                    </div>
+                    <div class="info-list-item clearfix">
+                        <span class="icon"><img src="/content/images/index/serve_yx.png" alt=""></span>
+                        <span class="num">3</span> <span class="text-wrap">
+                            <div class="item-title">VR全景营销转化</div>
+                            <p class="item-desc">3D环物、商品展示、在线交易、广告模块等全景交互功能，50+插件可开展时下最新颖的营销活动，打造企业独立品牌绝佳优势，实现合作伙伴广告效益最大化。</p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row slider">
+        <div class="mask"></div>
+        <div class="wrapper">
+            <div class="content clearfix">
+                <ul class="list">
+                    <li class="list-item fl">
+                        <div class="mask pos-a"></div>
+                        <div class="icon">
+                            <img src="/content/images/index/serve4.png" alt="">
+                        </div>
+                        <div class="bt-text">
+                            <span class="line-h"></span>
+                            <span class="num">4</span>
+                            <span class="text">全景小程序</span>
+                        </div>
+                        <div class="info-text">
+                            <div class="cell">
+                                小程序，不仅仅是展示，是一套具有强大营销力的完善的电商系统，致力于为企业提供全新的应用体验，一键制作小程序，提供线上支付绑定功能，更加便捷广泛地满足合作伙伴移动端的营销需求。
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-item fl">
+                        <div class="mask pos-a"></div>
+                        <div class="icon">
+                            <img src="/content/images/index/serve5.png" alt="">
+                        </div>
+                        <div class="bt-text">
+                            <span class="line-h"></span>
+                            <span class="num">5</span>
+                            <span class="text">七大小程序模板</span>
+                        </div>
+                        <div class="info-text">
+                            <div class="cell">
+                                七大小程序模板，包含教育、餐饮等行业，可任意添加在小程序中，打造专属个性化小程序，更加美观便捷地实现商品的展示，同时结合VR全景功能提供用户更好的消费体验。
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-item fl">
+                        <div class="mask pos-a"></div>
+                        <div class="icon">
+                            <img src="/content/images/index/serve6.png" alt="">
+                        </div>
+                        <div class="bt-text">
+                            <span class="line-h"></span>
+                            <span class="num">6</span>
+                            <span class="text">智慧城市</span>
+                        </div>
+                        <div class="info-text">
+                            <div class="cell">
+                                智慧城市提供行业商户高效稳定的“本地实体店+VR全景+互联网”新型营销方式，低成本大流量，支持覆盖全国范围内的商户入驻，同时让消费者体验到智慧型移动互联网生活。
+                            </div>
+                        </div>
+                    </li>
+                    <li class="list-item fl">
+                        <div class="mask pos-a"></div>
+                        <div class="icon">
+                            <img src="/content/images/index/serve7.png" alt="">
+                        </div>
+                        <div class="bt-text">
+                            <span class="line-h"></span>
+                            <span class="num">7</span>
+                            <span class="text">行业解决方案</span>
+                        </div>
+                        <div class="info-text">
+                            <div class="cell">
+                                针对线上线下展示体验，为重点行业推出具体行业解决方案，包括旅游、电商、地产、学校等行业，实现个性化展示，强化记忆点。
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row profit" id="profit">
+        <div class="wrapper">
+            <div class="r-title">
+                <h2>盈利模式</h2>
+                <div class="sub-title">五种盈利模式皆可为您带来可观收入</div>
+            </div>
+            <div class="content">
+                <div class="row item-top">
+                    <div class="item item-hover">
+                        <div class="icon"><i class="iconfont icon-xiangjizhuanhuan"></i></div>
+                        <h4>拍摄收入</h4>
+                        <p>代理商及其合作商通过我们的培训后可以承接全景拍摄业务，当下全景拍摄市场涉及各个行业，拍摄需求大。</p>
+                    </div>
+                    <div class="item item-hover">
+                        <div class="icon"><i class="iconfont icon-guanggaozu"></i></div>
+                        <h4>商家营销收入</h4>
+                        <p>代理商基于主平台可开设大量合作商帐号，同时可根据合作商户需求和平台特色提供活动策划等相关业务。</p>
+                    </div>
+                    <div class="item item-hover">
+                        <div class="icon"><i class="iconfont icon-qian"></i></div>
+                        <h4>广告投放及打赏分润收入</h4>
+                        <p>平台提供专门区域投放广告，可根据广告需求进行精准投放，同时可开启打赏功能进行分润。</p>
+                    </div>
+                </div>
+                <div class="row item-bt">
+                    <div class="item item-hover">
+                        <div class="icon"><i class="iconfont icon-zhuanye"></i></div>
+                        <h4>会员制度收入</h4>
+                        <p>全景系统提供代理商会员账号制度，不同级别的会员套餐拥有的权限功能不同，代理商可以此获利。</p>
+                    </div>
+                    <div class="item item-hover">
+                        <div class="icon"><i class="iconfont icon-zhaopin"></i></div>
+                        <h4>资源收入</h4>
+                        <p>合作客户可获得所在行业或地区全景拍摄资源，利用作品市场等平台功能达到资源的有效配置并获得利润。</p>
+                    </div>
+                    <div class="item item-bgimg"><img src="/content/images/index/profit_bg.png" alt=""></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row together">
+        <div class="wrapper">
+            <div class="r-title">
+                <h2>合作流程</h2>
+                <div class="sub-title">这是个合作共赢的时代</div>
+            </div>
+            <div class="content">
+                <div class="line-lee">
+                    <div class="lee-item">
+                        <!---->
+                        <div class="circle active">1</div>
+                        <div class="line line-r"></div>
+                    </div>
+                    <div class="lee-item">
+                        <div class="line line-l"></div>
+                        <div class="circle">2</div>
+                        <div class="line line-r"></div>
+                    </div>
+                    <div class="lee-item">
+                        <div class="line line-l"></div>
+                        <div class="circle">3</div>
+                        <div class="line line-r"></div>
+                    </div>
+                    <div class="lee-item">
+                        <div class="line line-l"></div>
+                        <div class="circle">4</div>
+                        <div class="line line-r"></div>
+                    </div>
+                    <div class="lee-item">
+                        <div class="line line-l"></div>
+                        <div class="circle">5</div>
+                        <div class="line line-r"></div>
+                    </div>
+                    <div class="lee-item">
+                        <div class="line line-l"></div>
+                        <div class="circle">6</div>
+                        <!---->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="item">
+                        <div class="icon"><img src="/content/images/index/together1.png" alt=""></div>
+                        <p>与渠道经理洽淡</p>
+                    </div>
+                    <div class="item">
+                        <div class="icon"><img src="/content/images/index/together2.png" alt=""></div>
+                        <p>提供公司证件</p>
+                    </div>
+                    <div class="item">
+                        <div class="icon"><img src="/content/images/index/together3.png" alt=""></div>
+                        <p>签订协议并交款</p>
+                    </div>
+                    <div class="item">
+                        <div class="icon"><img src="/content/images/index/together4.png" alt=""></div>
+                        <p>颁发授权书</p>
+                    </div>
+                    <div class="item">
+                        <div class="icon"><img src="/content/images/index/together5.png" alt=""></div>
+                        <p>培训后台操作</p>
+                    </div>
+                    <div class="item">
+                        <div class="icon"><img src="/content/images/index/together6.png" alt=""></div>
+                        <p>成为全景合作商</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row support bg-opacity pos-r">
+        <div class="mask"></div>
+        <div class="wrapper pos-a">
+            <div class="r-title">
+                <h2>多渠道支持</h2>
+            </div>
+            <div class="content">
+                <ul class="list tac clearfix">
+                    <li class="list-item">
+                        <div class="icon pos-r"><img src="/content/images/index/support1.png" alt=""></div>
+                        <div class="line-dot"></div>
+                        <p>项目施工后援支持</p>
+                    </li>
+                    <li class="list-item">
+                        <div class="icon pos-r"><img src="/content/images/index/support2.png" alt=""></div>
+                        <div class="line-dot"></div>
+                        <p>专业市场开发培训</p>
+                    </li>
+                    <li class="list-item">
+                        <div class="icon pos-r"><img src="/content/images/index/support3.png" alt=""></div>
+                        <div class="line-dot"></div>
+                        <p>广告资源专属开发通道</p>
+                    </li>
+                    <li class="list-item">
+                        <div class="icon pos-r"><img src="/content/images/index/support4.png" alt=""></div>
+                        <div class="line-dot"></div>
+                        <p>宣传物料支持</p>
+                    </li>
+                    <li class="list-item">
+                        <div class="icon pos-r"><img src="/content/images/index/support5.png" alt=""></div>
+                        <div class="line-dot"></div>
+                        <p>行业解决方案支持</p>
+                    </li>
+                    <li class="list-item">
+                        <div class="icon pos-r"><img src="/content/images/index/support6.png" alt=""></div>
+                        <div class="line-dot"></div>
+                        <p>运营推广支持</p>
+                    </li>
+                    <li class="list-item">
+                        <div class="icon pos-r"><img src="/content/images/index/support7.png" alt=""></div>
+                        <div class="line-dot"></div>
+                        <p>专业技术支持</p>
+                    </li>
+                    <li class="list-item">
+                        <div class="icon pos-r"><img src="/content/images/index/support8.png" alt=""></div>
+                        <div class="line-dot"></div>
+                        <p>战略合作护航计划</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row shared">
+        <div class="wrapper">
+            <div class="r-title">
+                <h2>共享优势</h2>
+            </div>
+            <div class="content">
+                <div class="list tac clearfix">
+                    <div class="list-item">
+                        <div class="icon pos-r"><img src="/content/images/index/share1.png" alt=""></div>
+                        <h4>平台升级</h4>
+                        <p>实时关注客户需求，完善平台功能，定期发布更新推送。</p>
+                    </div>
+                    <div class="list-item">
+                        <div class="icon pos-r"><img src="/content/images/index/share2.png" alt=""></div>
+                        <h4>运营推广</h4>
+                        <p>前端页面设计、原创软文撰写、广告投放运营推广、第三方平台对接。</p>
+                    </div>
+                    <div class="list-item">
+                        <div class="icon pos-r"><img src="/content/images/index/share3.png" alt=""></div>
+                        <h4>免费培训</h4>
+                        <p>免费帮助合作客户及其平台用户快速掌握VR全景技术。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row interactive bg-gray">
+        <div class="wrapper">
+            <div class="r-title">
+                <h2>互动功能模块矩阵</h2>
+            </div>
+            <div class="content tac" id="tabWrap">
+                <div class="tab">
+                    <span class="tab-item active">行业插件</span>
+                    <span class="tab-item">营销插件</span>
+                    <span class="tab-item">交互功能</span>
+                </div>
+                <ul class="tab-cont show" id="industry"></ul>
+                <ul class="tab-cont" id="marketing"></ul>
+                <ul class="tab-cont" id="interactive">
+                    <img src="/content/images/index/plugin3.png" alt="">
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row product" id="product">
+        <div class="wrapper">
+            <div class="r-title">
+                <h2>项目优势</h2>
+            </div>
+            <div class="content">
+                <ul class="list clearfix">
+                    <li class="list-item pos-r fl list-item text-item">
+                        <div class="info">
+                            <h4>市场潜力大</h4>
+                            <p>适用于线下各个行业领域，大到政府项目、旅游景区，小到餐饮店、酒店、住宿、画展，展尽一切（房产旅游、行业会展、医院、学校、企业、商超、银行等）。</p>
+                        </div>
+                    </li>
+                    <li class="list-item pos-r fl list-item">
+                        <div class="icon"><img src="/content/images/index/product1.png" alt=""></div>
+                    </li>
+                    <li class="list-item pos-r fl list-item text-item">
+                        <div class="info">
+                            <h4>轻资产运营</h4>
+                            <p>无需门店，1个人，1台电脑、一部单反相机（云台、镜头、三脚架）即可启动。 </p>
+                        </div>
+                    </li>
+                    <li class="list-item pos-r fl list-item">
+                        <div class="icon"><img src="/content/images/index/product2.png" alt=""></div>
+                    </li>
+                    <li class="list-item pos-r fl list-item">
+                        <div class="icon"><img src="/content/images/index/product3.png" alt=""></div>
+                    </li>
+                    <li class="list-item pos-r fl list-item text-item">
+                        <div class="info">
+                            <h4>制作周期短</h4>
+                            <p>一般的场景全景VR项目，拍摄制作周期时间为3~5天完成。</p>
+                        </div>
+                    </li>
+                    <li class="list-item pos-r fl list-item">
+                        <div class="icon"><img src="/content/images/index/product4.png" alt=""></div>
+                    </li>
+                    <li class="list-item pos-r fl list-item text-item">
+                        <div class="info">
+                            <h4>回报率高</h4>
+                            <p>据当地市场情况及结合行业需求自主制定市场开发定价权，终端市场开发，商家亦可自定义价格。 </p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row scene bg-gray">
+        <div class="wrapper">
+            <div class="r-title">
+                <h2>应用场景</h2>
+            </div>
+            <div class="content">
+                <ul class="list clearfix">
+                    <li class="list-item fl">
+                        <div class="icon fl"><i class="iconfont icon-zhengwu"></i></div>
+                        <div class="info fr">
+                            <h4>政务服务</h4>
+                            <p>通过全景实现政务服务场景可视化，包括政务导览、政务展示、城市规划展览展示、城市形象宣传航拍、城市建设成果汇报等。</p>
+                        </div>
+                    </li>
+                    <li class="list-item fl">
+                        <div class="icon fl"><i class="iconfont icon-hangye"></i></div>
+                        <div class="info fr">
+                            <h4>行业服务</h4>
+                            <p>可应用到房产、汽车、旅游、家居、校园、博物馆、酒店、娱乐、商场等720°全景展示。</p>
+                        </div>
+                    </li>
+                    <li class="list-item fl">
+                        <div class="icon fl"><i class="iconfont icon-qiye"></i></div>
+                        <div class="info fr">
+                            <h4>企业服务</h4>
+                            <p>全景系统可快速将合作方企业以720°3D全景的形式搬到互联网上、微信上，足不出户也可彰显企业实力，促进销售转化。</p>
+                        </div>
+                    </li>
+                    <li class="list-item fl">
+                        <div class="icon fl"><i class="iconfont icon-qncyz"></i></div>
+                        <div class="info fr">
+                            <h4>创业服务</h4>
+                            <p>平台拥有完善的全景创业体系，可提供合作方技术培训、案例输出、市场指导，让代理商快速通过VR全景变现。</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="row news">
+        <div class="wrapper">
+            <div class="r-title">
+                <h2>行业新闻资讯</h2>
+            </div>
+            <div class="content">
+                @if (ViewBag.NewsList != null)
+                {
+                    <ul class="list clearfix">
+                        @foreach (News item in ViewBag.NewsList)
+                        {
+                            <li class="list-item fl">
+                                <div class="icon fl"><img src="@item.full_cover_url" alt=""></div>
+                                <div class="info fr">
+                                    <h4 class="omit">@item.title</h4>
+                                    <p class="omit2">@item.summary</p>
+                                    <p class="clearfix mt10">
+                                        <span class="fl">@item.created.ToString("yyyy-MM-dd")</span>
+                                        <a href="@(WebConfigs.GetDetailPagePath("news", item.id))" class="fr" target="_blank">查看更多</a>
+                                    </p>
+                                </div>
+                            </li>
+                        }
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script type="text/javascript" src="/Content/js/pages/index.js"></script>
+}

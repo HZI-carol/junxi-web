@@ -1,0 +1,158 @@
+.module-content > .wrapper {
+    margin: 0 auto;
+    width: 1200px;
+}
+
+.news {
+    width: 796px;
+}
+
+    .news .news-category a.button {
+        -webkit-box-sizing: border-box;
+        box-sizing: border-box;
+        text-align: center;
+        font-size: 18px;
+        display: inline-block;
+        cursor: pointer;
+        color: #333;
+        background-color: #fff;
+        border: 1px solid #e8e8e8;
+        padding: 0 28px;
+        border-radius: 19px;
+        height: 40px;
+        line-height: 40px;
+        margin-right: 20px;
+    }
+
+        .news .news-category a.button:hover {
+            opacity: 0.85;
+        }
+
+        .news .news-category a.button:hover,
+        .news .news-category a.button.active {
+            background-color: #9c0;
+            color: #fff;
+        }
+
+    .news .news-list .item-wrap ~ .item-wrap {
+        margin-top: 27px;
+    }
+
+    .news .news-list .item-wrap .item {
+        display: block;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid #ccc;
+    }
+
+    .news .news-list .item-wrap .item:first-child {
+        margin-top: 0;
+        padding-top: 0;
+        border-top: none;
+    }
+
+        .news .news-list .item-wrap .item .title a {
+            color: #9c0;
+            font-size: 24px;
+        }
+
+        .news .news-list .item-wrap .item .time {
+            margin: 6px 0 17px 4px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .news .news-list .item-wrap .item .img {
+            width: 100%;
+            height: 340px;
+            display: block;
+        }
+
+            .news .news-list .item-wrap .item .img img {
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+            }
+
+        .news .news-list .item-wrap .item .desc {
+            color: #666;
+            font-size: 16px;
+            line-height: 24px;
+            max-height: 48px;
+            position: relative;
+        }
+
+            .news .news-list .item-wrap .item .desc .see-detail {
+                position: absolute;
+                right: 0;
+                bottom: -3px;
+                background-color: #fff;
+                color: #f48b36;
+                width: 92px;
+                text-align: center;
+                font-size: 14px;
+            }
+
+                .news .news-list .item-wrap .item .desc .see-detail:hover {
+                    color: #ff5400;
+                }
+
+.news-recommend {
+    width: 364px;
+    background-color: #f8f8f8;
+    padding: 18px 20px 20px;
+}
+
+    .news-recommend .title {
+        color: #333;
+        font-size: 24px;
+        border-bottom: 1px solid #e1e1e1;
+        position: relative;
+        padding-left: 10px;
+        padding-bottom: 8px;
+    }
+
+        .news-recommend .title:before {
+            position: absolute;
+            top: 6px;
+            left: 0;
+            content: '';
+            width: 2px;
+            background-color: #9c0;
+            height: 24px;
+        }
+
+    .news-recommend .news-recommend-list .item-wrap .item {
+        border-bottom: 1px solid #e1e1e1;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        height: 110px;
+        padding: 20px 0;
+    }
+
+        .news-recommend .news-recommend-list .item-wrap .item:last-child {
+            border: none;
+        }
+
+        .news-recommend .news-recommend-list .item-wrap .item:hover .desc {
+            color: #9c0;
+        }
+
+        .news-recommend .news-recommend-list .item-wrap .item img.img {
+            -webkit-box-flex: 0;
+            -ms-flex: 0 0 95px;
+            flex: 0 0 95px;
+            height: 70px;
+            width: 95px;
+            border-radius: 5px;
+        }
+
+        .news-recommend .news-recommend-list .item-wrap .item .desc {
+            display: inline-block;
+            padding-left: 20px;
+            line-height: 34px;
+            min-height: 60px;
+            font-size: 16px;
+            color: #333;
+        }

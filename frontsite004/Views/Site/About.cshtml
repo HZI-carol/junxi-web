@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = "关于我们";
+    ViewBag.Menu = "/about";
+}
+
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/about.css" />
+}
+
+<!-- banner-->
+<div class="module-banner">
+    <img src="/content/images/about/about-banner.png" />
+</div>
+<!-- content-->
+<section class="module-content">
+    <div class="wrapper">
+        <div class="about">
+            <!-- 公司简介-->
+            <div class="company-intro">
+                <h2 class="section-title">公司简介</h2>
+                <div class="section-intro">
+                    <div class="top" style="padding-bottom: 20px;">
+                        <p class="desc">@(WebConfigs.Config.companyname)是VR全景营销解决方案提供商，为全行业商企提供全景展示、VR全景拍摄、全景制作、全景图片的发布和分享等一站式服务，帮助商企通过全景展示有效降低营销成本。</p>
+                        <p class="desc">公司秉持着诚信为本、互利共赢的核心理念专注为客户打造专业全景平台，全景平台的应用能够让商企更快速树立品牌形象，提升知名度和消费者信任感，同时，商企可通过平台的VR全景漫游功能和营销转化功能极具针对性地更高效地实现消费者转化及留存。</p>
+                        <p class="desc">公司面向全国诚招代理商，期待更多有意向在VR全景行业开创美好未来的合伙人加入我们！</p>
+                    </div>
+                </div>
+                <div class="section-technical-strength">
+                    <h2 class="section-title">科技改变世界</h2>
+                    <ul class="point">
+                        <li class="item">
+                            <div class="top">
+                                <img src="/content/images/about/science1.png" />
+                                <div class="title">技术支持</div>
+                            </div>
+                            <div class="bottom">
+                                <p>全景平台升级免费共享，过硬的技术团队随时为合伙人解决技术问题，并按照合伙人需求对功能开发进行扩充。</p>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="top">
+                                <img src="/content/images/about/science2.png" />
+                                <div class="title">BOSS服务</div>
+                            </div>
+                            <div class="bottom">
+                                <p>维携手微信开放平台接口以及阿里云服务器打造全景平台，拥有超强兼容性，也可在第三方平台对接全景。</p>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="top">
+                                <img src="/content/images/about/science3.png" />
+                                <div class="title">灵活定制</div>
+                            </div>
+                            <div class="bottom">
+                                <p>可为合作伙伴提供个性化功能支持，满足用户更多需求，可根据需求量身打造合作伙伴需要的全景作品。</p>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <div class="top">
+                                <img src="/content/images/about/science4.png" />
+                                <div class="title">快速响应</div>
+                            </div>
+                            <div class="bottom">
+                                <p>以最快的速度响应合作伙伴紧急、多变的需求，提供7*24在线服务支持，为合作伙伴带来快速、友好、舒心的体验。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="section-corporate-culture">
+                    <h2 class="section-title">企业文化</h2>
+                    <ul class="point">
+                        <li class="item">
+                            <div class="icon"><i class="iconfont icon-qiyelinian"></i></div>
+                            <div class="title">发展理念</div>
+                            <p class="desc">专注于为合作伙伴提供VR全景营销解决方案。</p>
+                        </li>
+                        <li class="item">
+                            <div class="icon"><i class="iconfont icon-shiming-"></i></div>
+                            <div class="title">使命</div>
+                            <p class="desc">诚信为本，合作共赢。</p>
+                        </li>
+                        <li class="item">
+                            <div class="icon"><i class="iconfont icon-guanyuwomen-jituanwenhua-yuanjingicon"></i></div>
+                            <div class="title">愿景</div>
+                            <p class="desc">我们将一如既往秉承“顾客至上”的理念服务，共同为解决商企的营销难题而不懈努力。</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script type="text/javascript" src="/Content/js/pages/about.js"></script>
+}

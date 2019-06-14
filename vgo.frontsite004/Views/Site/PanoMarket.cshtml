@@ -1,0 +1,152 @@
+﻿@{
+    ViewBag.Title = "作品市场";
+    ViewBag.Menu = "/panomarket";
+}
+@using Newtonsoft.Json
+@using vgo.frontsite004.Models
+
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/panomarket.css" />
+}
+
+<!-- banner-->
+<div class="module-banner" style="height:500px">
+    <img src="/content/images/panomarket/banner.png" />
+    <h2>@(WebConfigs.Config.platname)作品市场 原创全景精品 全行业覆盖 任君选择 在线交易平台 购买零风险</h2>
+</div>
+<!-- content-->
+<section class="module-content">
+    <div class="wrapper">
+        <div class="product-market">
+            <!-- 全景分类 -->
+            <ul class="category clearfix">
+                <li class="item" v-bind:class="typeId == 0 ? 'active': ''">
+                    <div class="info">
+                        <a href="javascript:;" @@click="typeClick()">全部</a>
+                    </div>
+                </li>
+                @if (ViewBag.TypeList != null)
+                {
+                    foreach (MarketPanoType item in ViewBag.TypeList)
+                    {
+                        <li class="item" v-bind:class="typeId == '@item.id' ? 'active': ''">
+                            <div class="info">
+                                <a href="javascript:;" @@click="typeClick('@item.id')">@item.name</a>
+                            </div>
+                        </li>
+                    }
+                }
+            </ul>
+            <!-- 全景-->
+            <ul class="pano-list clearfix" v-cloak>
+                <li class="item" v-for="item in list" v-bind:key="item.id">
+                    <div class="top">
+                        <div class="img">
+                            <a v-bind:href="detailPath + item.id"><img v-bind:src="item.full_icon_src" /></a>
+                        </div>
+                        <a class="view" v-bind:href="item.panoview_url" target="_blank"><i class="iconfont icon-quanping"></i></a>
+                        <a v-if="item.has_buy" class="has-alredy-buy" href="javascript:;">已购买</a>
+                        <a v-else class="add-to-carts" href="javascript:;" @@click="addCart(item)"><i class="iconfont icon-cart"></i></a>
+                    </div>
+                    <div class="bottom">
+                        <a class="title omit" v-bind:href="detailPath + item.id">{{item.name}}</a><span class="product-price">¥ {{item.price}}</span>
+                    </div>
+                </li>
+            </ul>
+            <div class="module-pagination">
+                <el-pagination background layout="total, prev, pager, next" v-bind:total="total" v-bind:page-size="pageSize" v-bind:current-page="page"
+                               @@current-change="getList" v-if="total > 0">
+                </el-pagination>
+                <div class="no-data" v-if="total == 0">暂无数据</div>
+            </div>
+
+            <!-- 购物车模块 -->
+            <app-market-cart ref="cart" v-bind:user-id="user_id" v-bind:login-url="loginUrl" v-bind:detail-path="detailPath" v-bind:cart-list="cartList" @@getcartlist="getCartList">
+            </app-market-cart>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    @{
+        Html.RenderPartial("~/Views/Shared/_PanoMarketCart.cshtml");
+        //详细页面路径
+        string detailPath = "/panomarket/";
+        if (WebConfigs.IsHtmlSuffix)
+        {
+            detailPath = "/panomarket-detail.html?id=";
+        }
+        int user_id = 0;
+        if (ViewBag.User != null)
+        {
+            user_id = ViewBag.User.id;
+        }
+        string loginUrl = $"{WebConfigs.GetPagePath("/login")}?redirect={ WebConfigs.GetPagePath("/panomarket")}";
+    }
+
+    <script type="text/javascript">
+        (function () {
+            var initData = @Html.Raw(JsonConvert.SerializeObject(ViewBag.PanoPagedList))
+                initData = initData || {}
+
+            new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        detailPath: "@detailPath",
+                        user_id: @user_id,
+                        loginUrl: "@loginUrl",
+                        page: 1,
+                        pageSize: 12,
+                        list: initData.list || [],
+                        total: initData.count || 0,
+                        typeId: 0,
+                        cartList: []
+                    }
+                },
+                methods: {
+                    typeClick(typeId) {
+                        this.typeId = typeId || 0
+                        this.getList(1)
+                    },
+                    getList(page) {
+                        var self = this
+                        this.page = page || 1
+                        var data = {
+                            pano_type: self.typeId
+                        }
+                        this.$service.getMarketPanoList(this.page, this.pageSize, data, function (res) {
+                            var data = res.data
+                            self.list = data.list
+                            self.total = data.count
+                        })
+                    },
+                    addCart(item) {
+                        var self = this
+                        if (this.user_id <= 0) {
+                            location.href = this.loginUrl
+                        } else if (item.fk_user_id == this.user_id) {
+                            this.$message.warning("不能购买自己的作品");
+                        } else if (this.cartList.some(function (data) { return data.fk_pano_id == item.fk_pano_id })) {
+                            self.$refs.cart.showCartDialog = true
+                        } else {
+                            self.$refs.cart.showCartDialog = true
+                            this.$service.addMarketCart(item.id, function (res) {
+                                self.getCartList()
+                            })
+                        }
+                    },
+                    getCartList() {
+                        var self = this
+                        this.$service.getMarketCartList(function (res) {
+                            self.cartList = res.data
+                            self.cartList.forEach(function (item) {
+                                self.$set(item, "isSelect", true)
+                            });
+                        })
+                    }
+                }
+            })
+        })();
+    </script>
+}

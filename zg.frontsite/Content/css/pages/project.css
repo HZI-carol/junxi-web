@@ -1,0 +1,111 @@
+﻿@charset 'UTF-8';
+/* 全景项目 */
+.banner > img {
+    width: 100%;
+    height: 610px;
+}
+
+.module-con {
+    margin: 20px auto;
+}
+
+.project {
+    width: 1263px;
+}
+
+.module-con .wrap .con-catalogue {
+    margin-bottom: 15px;
+}
+
+    .module-con .wrap .con-catalogue ul li {
+        display: inline-block;
+        width: 134px;
+        line-height: 42px;
+        color: #333;
+        border: 1px solid #CFCFCF;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 16px;
+        margin-right: 10px;
+        margin-bottom:15px;
+    }
+
+        .module-con .wrap .con-catalogue ul li:hover {
+            background-color: #D7141A;
+            color: #fff;
+        }
+
+    .module-con .wrap .con-catalogue ul .active {
+        background-color: #D7141A;
+        color: #fff !important;
+    }
+
+.module-con .wrap .con-title .title1 > span {
+    color: #666;
+    font-weight: 700;
+    margin-left: 15px;
+}
+
+.module-con .wrap .module-con-provide {
+    width: 1260px;
+    align-content: center;
+}
+
+    .module-con .wrap .module-con-provide .box {
+        display: inline-block;
+        width: 300px;
+        height: 362px;
+        overflow: hidden;
+        /* margin-bottom: 30px; */
+        margin-right: 10px;
+    }
+
+        .module-con .wrap .module-con-provide .box img {
+            width: 300px;
+            height: 297px;
+        }
+
+        .module-con .wrap .module-con-provide .box .box-content {
+            height: 30px;
+            line-height: 22px;
+            padding-top: 10px;
+            color: #fff;
+            background-color: #000;
+            text-indent: 20px;
+        }
+
+            .module-con .wrap .module-con-provide .box .box-content .title {
+                font-size: 15px;
+            }
+
+            .module-con .wrap .module-con-provide .box .box-content .con {
+                display: inline-block;
+                font-size: 14px;
+                text-indent: 20px;
+            }
+
+.iconfont {
+    font-size: 20px;
+}
+
+.module-con .wrap .module-con-pages ul {
+    text-align: center;
+    margin-bottom: 27px;
+}
+
+    .module-con .wrap .module-con-pages ul li {
+        display: inline-block;
+        padding: 20px;
+        line-height: 12px;
+        color: #333;
+        border: 1px solid #CFCFCF;
+        border-radius: 3px;
+        text-align: center;
+        font-size: 16px;
+        margin-right: 10px;
+    }
+
+        .module-con .wrap .module-con-pages ul li:hover {
+            background-color: #D7141A;
+            color: #fff;
+        }

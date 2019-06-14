@@ -1,0 +1,191 @@
+﻿@{
+    ViewBag.Title = "查看全景";
+    ViewBag.Menu = "/panoview";
+}
+@using Newtonsoft.Json
+@using zg.frontsite
+@{
+    var projects = Model as Project;
+}
+
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/panoview.css" />
+}
+
+<!-- 作品详情页 -->
+<div class="module-con con works-show">
+    <div class="wrap">
+        <div class="show-box">
+            @if (projects != null)
+            {
+                <iframe src="@(WebConfigs.UserPanoViewUrl + projects.fk_pano_id)" frameborder="0" name="show"></iframe>
+                <div class="full-screen"><a href="@projects.panoview_url">全屏展示</a></div>
+                <div class="show-box-bottom">
+                    <div class="tip">
+                        <h3>@projects.project_name</h3>
+                        <ul>
+                            <li>@projects.tag_id</li>
+                        </ul>
+                    </div>
+                    <div class="view">
+                        浏览：<span>@projects.seecount</span>次
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="works-box">
+            <ul class="works-list">
+                <li class="active">作品信息</li>
+                <li>相关作品</li>
+            </ul>
+            <div class="bodys">
+                <!-- 作品信息 -->
+                <div class="information">
+                    <ul>
+                        @if (projects != null)
+                        {
+                            <li>
+                                <h3>@projects.project_name</h3>
+                                <p>类型：@projects.tag_id</p>
+                                <p>浏览量：<span>@projects.seecount</span>次</p>
+                                <p>发布日期：<span>@projects.created.ToString("yyyy-MM-dd")</span></p>
+                                <p>手机二维码查看：<img src="@WebConfigs.ApiUrl/api_qrcode.aspx?newpano=true&id=@projects.fk_pano_id" alt=""></p>
+                            </li>
+                            <li>
+                                <span>---------公司信息---------</span>
+                                <h3>@projects.nickname</h3>
+                                <p>手机：@projects.contact_phone</p>
+                                <p>公司：<span>@projects.company_name</span></p>
+                                <p>公司二维码：<img src="@projects.full_qrcode_url"></p>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <!-- 相关作品 -->
+                <div class="related">
+                    <ul style="padding-bottom:20px;">
+                        <li v-for="item in list" v-bind:key="item.fk_pano_id">
+                            <a v-bind:href="'/panoview/' + item.fk_pano_id + '?user_id=' + item.user_id">
+                                <img v-bind:src="item.full_image_url" alt="">
+                                <span>{{item.created | dateFilter}}</span>
+                            </a>
+                            <div>
+                                <p>{{item.project_name}}</p>
+                                <p>浏览量：{{item.seecount}} 次</p>
+                            </div>
+                        </li>
+                    </ul>
+                    <div style="padding-bottom:20px; text-align:center; color: #D7141A; font-size:15px;" v-show="list.length < total">
+                        <a @@click="getMore()">加载更多</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- 相似案例 -->
+<div class="module-con con case">
+    <div class="wrap">
+        <div class="con-case">
+            <h3 class="title1">
+                相似案例
+            </h3>
+            <!--轮播图2-->
+            <div style="position: relative;" id="slidershow">
+                <div class="swiper-container" id="swiper3">
+                    <div class="swiper-wrapper">
+                        @if (ViewBag.PanoButonsList != null)
+                        {
+                            foreach (Project item in ViewBag.PanoButonsList)
+                            {
+                                <div class="swiper-slide" style="margin-right:85px!important">
+                                    <div class="swiper-slide-content">
+                                        <div class="box">
+
+                                            <a href="@("/panoview/" + item.fk_pano_id+"?user_id="+item.user_id)">
+                                                <img src="@item.full_image_url" alt="@item.project_name">
+                                                <div class="box-content">
+                                                    <h4 class="title">@item.project_name</h4>
+                                                </div>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                <div class="swiper-button-prev" id="swiper3-button-prev"></div>
+                <div class="swiper-button-next" id="swiper3-button-next"></div>
+            </div>
+        </div>
+        <div>
+            <div class="con-company">
+                @if (projects != null)
+                {
+                    <h3 class="title1">
+                        公司简介
+                    </h3>
+                    <p>@projects.description</p>
+                    <ul>
+                        <li>手机：<span>@projects.contact_phone</span></li>
+                        <li>公司：<span>@projects.company_name</span></li>
+                        <li>公司二维码：<img src="@projects.full_qrcode_url" alt=""></li>
+                    </ul>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    @{
+        Html.RenderPartial("~/Views/Shared/_VueBase.cshtml");
+    }
+    <script type="text/javascript">
+        (function () {
+            var initData = @Html.Raw(JsonConvert.SerializeObject(ViewBag.PanoRightList))
+                initData = initData || {}
+
+            new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        page: 1,
+                        pageSize: 10,
+                        list: initData.list || [],
+                        total: initData.count || 0,
+                    }
+                },
+                methods: {
+                    getMore() {
+                        if (this.list.length < this.total) {
+                            this.page++
+                            this.getList()
+                        }
+                    },
+                    getList() {
+                        var self = this
+                        var data = {
+                            tag_id: "@projects.tag_id",
+                            orderBy: ""
+                        }
+                        this.$service.getProjectPanoList(this.page, this.pageSize, data, function (res) {
+                            var data = res.data
+                            if (data.list) {
+                                for (var k in data.list) {
+                                    self.list.push(data.list[k])
+                                }
+                            }
+                            self.total = data.count
+                        })
+                    }
+                }
+            })
+        })();
+    </script>
+
+    <script type="text/javascript" src="/Content/js/pages/index.js"></script>
+}
+

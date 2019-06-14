@@ -1,0 +1,30 @@
+﻿<script src="https://unpkg.com/vue@2.5.17/dist/vue.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/element-ui@2.4.11/lib/theme-chalk/index.css">
+<script src="https://unpkg.com/element-ui@2.4.11/lib/index.js"></script>
+<script type="text/javascript" src="/Content/js/lib/dateformat.js?v1.2.3"></script>
+<script type="text/javascript" src="/Content/js/service.js?v1.0"></script>
+<script type="text/javascript">
+    @{
+        var token = "";
+        if(ViewBag.User != null)
+        {
+            token = ViewBag.User.access_token;
+        }
+    }
+    (function () {
+        Vue.use(window.Service, { baseUrl: "@WebConfigs.ApiUrl", token: "@token" })
+
+        Vue.filter('dateFilter', function (value) {
+            if (!value) {
+                return ''
+            }
+            return dateFormat(value, 'yyyy-mm-dd')
+        })
+        Vue.filter('datetimeFilter', function (value) {
+            if (!value) {
+                return ''
+            }
+            return dateFormat(value, 'yyyy-mm-dd HH:MM:ss')
+        })
+    })();
+</script>

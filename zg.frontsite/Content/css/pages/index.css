@@ -1,0 +1,330 @@
+﻿
+/*one*/
+@charset 'UTF-8';
+/* 精选推荐 */
+.module-con {
+    line-height: 70px;
+    margin: 20px auto;
+    font-size: 20px;
+}
+
+.con1 {
+    /* padding: 0 313px; */
+    width: 1263px;
+}
+
+.module-con .wrap .con-title {
+    color: #000;
+}
+
+    .module-con .wrap .con-title .title1 > span {
+        color: #666;
+        font-size: 20px;
+        font-weight: 700;
+        margin-left: 15px;
+
+    }
+
+.module-con .wrap .module-con-provide {
+    /* display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap; */
+    width: 1260px;
+    /* height: 770px; */
+    /* align-items:flex-end; */
+    align-content: center;
+    /* align-content:space-between; */
+}
+
+    .module-con .wrap .module-con-provide .box {
+        display: inline-block;
+        width: 300px;
+        height: 362px;
+        overflow: hidden;
+        margin-right: 10px;
+    }
+
+        .module-con .wrap .module-con-provide .box img {
+            width: 300px;
+            height: 297px;
+        }
+
+        .module-con .wrap .module-con-provide .box .box-content {
+            /* height: 44px; */
+            line-height: 22px;
+            padding: 10px 0;
+            color: #fff;
+            background-color: #000;
+            text-indent: 20px;
+        }
+
+            .module-con .wrap .module-con-provide .box .box-content .title {
+                font-size: 15px;
+                /* font-weight: 600; */
+            }
+
+            .module-con .wrap .module-con-provide .box .box-content .con {
+                display: inline-block;
+                font-size: 14px;
+                text-indent: 20px;
+            }
+
+.iconfont {
+    font-size: 20px;
+}
+
+
+/*two*/
+
+@charset 'UTF-8';
+/* 优秀装企 */
+
+.con2 {
+    background-color: #F1F1F1;
+    margin: 0 auto;
+    padding: 10px 0 30px;
+}
+
+.con .wrap {
+    max-width: 1260px;
+    margin: 0 auto;
+}
+
+.con2 .wrap .con-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.more {
+    font-size: 14px;
+    color: #666;
+}
+
+    .more:hover {
+        color: #D7141A;
+    }
+
+.con2 .wrap > img {
+    width: 1260px;
+    height: 300px;
+    margin-top: 50px;
+}
+
+
+/* 轮播2 */
+
+
+#swiper2 {
+    width: 1270px;
+    margin-left: -2px;
+    box-sizing: border-box;
+    /* margin-top:50px; */
+}
+
+    #swiper2 .swiper-slide {
+        width: 400px;
+        height: 190px;
+        /* margin-right: 85px!important; */
+    }
+
+        #swiper2 .swiper-slide .swiper-slide-content {
+            display: flex;
+            justify-content: space-between;
+            width: 320px;
+            height: 110px;
+            padding: 40px;
+            background: #000;
+            color: #ddd;
+            font-size: 16px;
+            line-height: 30px;
+        }
+
+            #swiper2 .swiper-slide .swiper-slide-content > .swiper-content-logo {
+                /* width: 100px;
+			height: 100px;
+			line-height: 100px;
+			 border-radius:50%;
+			background: #fff; 
+			text-align: center; */
+            }
+
+                #swiper2 .swiper-slide .swiper-slide-content > .swiper-content-logo img {
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 50%;
+                }
+
+            #swiper2 .swiper-slide .swiper-slide-content > .swiper-content-company {
+                width: 200px;
+                height: 200px;
+            }
+
+                #swiper2 .swiper-slide .swiper-slide-content > .swiper-content-company .swiper-company-name h5 {
+                    display: inline-block;
+                    font-size: 16px;
+                }
+
+                #swiper2 .swiper-slide .swiper-slide-content > .swiper-content-company .swiper-company-name .icon-yule {
+                    color: #EEB407;
+                }
+
+                #swiper2 .swiper-slide .swiper-slide-content > .swiper-content-company .swiper-company-address {
+                    font-size: 14px;
+                }
+
+                    #swiper2 .swiper-slide .swiper-slide-content > .swiper-content-company .swiper-company-address > .iconfont {
+                        color: #ddd;
+                        font-size: 14px;
+                    }
+
+                #swiper2 .swiper-slide .swiper-slide-content > .swiper-content-company > span {
+                    font-size: 14px;
+                    line-height: 20px;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: -webkit-box;
+                    -webkit-box-orient: vertical;
+                    -webkit-line-clamp: 2;
+                }
+
+        #swiper2 .swiper-slide a {
+            transition: 0.2s;
+        }
+
+            #swiper2 .swiper-slide a:hover {
+                opacity: .6;
+            }
+
+
+#swiper2-button-prev {
+    left: -3%;
+    top: 70px;
+    margin-top: 0;
+    z-index: 1;
+    transition: 0.2s;
+    opacity: .5;
+}
+
+#swiper2-button-next {
+    right: -3%;
+    top: 70px;
+    border-radius: 5px;
+    margin-top: 0;
+    z-index: 1;
+    transition: 0.2s;
+    opacity: .5;
+}
+
+.swiper-button-prev:hover, .swiper-button-next:hover {
+    opacity: 1;
+}
+
+/*three*/
+@charset 'UTF-8';
+/* 咨询文章  */
+.con3 .wrap {
+    display: flex;
+    justify-content: space-between;
+}
+
+b {
+    width: 1px;
+    height: 625px;
+    margin-top: 20px;
+    background-color: #ccc;
+}
+
+.con3 .wrap .con-left .con-title {
+    width: 830px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.con3 .wrap .con-left .con-content {
+    margin-bottom: 40px;
+}
+
+    .con3 .wrap .con-left .con-content ul li {
+        display: flex;
+        justify-content: space-between;
+    }
+
+        .con3 .wrap .con-left .con-content ul li img {
+            width: 375px;
+            height: 170px;
+            vertical-align: middle;
+        }
+
+        .con3 .wrap .con-left .con-content ul li .con-text {
+            position: relative;
+            width: 430px;
+            vertical-align: middle;
+        }
+
+            .con3 .wrap .con-left .con-content ul li .con-text h5 {
+                line-height: 25px;
+                font-size: 16px;
+                color: #5C5C5C;
+            }
+
+            .con3 .wrap .con-left .con-content ul li .con-text > span {
+                display: inline-block;
+                width: 332px;
+                line-height: 24px;
+                font-size: 15px;
+                margin-top: 20px;
+                color: #666;
+            }
+
+            .con3 .wrap .con-left .con-content ul li .con-text .con-text-foot {
+                display: flex;
+                position: absolute;
+                bottom:0;
+                justify-content: space-between;
+                width: 430px;
+                line-height: 20px;
+                color: #666;
+            }
+
+                .con3 .wrap .con-left .con-content ul li .con-text .con-text-foot > span {
+                    font-size: 15px;
+                }
+
+                .con3 .wrap .con-left .con-content ul li .con-text .con-text-foot > p .con-text-img {
+                    display: inline-block;
+                    width: 25px;
+                    height: 25px;
+                    background: url(../../images/logo2.png) no-repeat;
+                    /* background-size: 70%; */
+                    background-position: center;
+                    border-radius: 50%;
+                    vertical-align: middle;
+                }
+
+                .con3 .wrap .con-left .con-content ul li .con-text .con-text-foot > p span {
+                    font-size: 16px;
+                    /* vertical-align: top; */
+                }
+                .con3 .wrap .con-left .con-content ul li .con-text .con-text-foot > p .iconfont{
+                    vertical-align: bottom;
+                    font-size: 18px;
+                }
+
+.con3 .wrap .con-right {
+    width: 300px;
+}
+
+    .con3 .wrap .con-right .con-title {
+        display: flex;
+        justify-content: space-between;
+        text-align: center;
+    }
+
+    .con3 .wrap .con-right .con-content ul li {
+        margin-bottom: 22px;
+    }
+
+    .con3 .wrap .con-right .con-content img {
+        width: 300px;
+        height: 136px;
+    }

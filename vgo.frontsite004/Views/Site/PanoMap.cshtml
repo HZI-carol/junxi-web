@@ -1,0 +1,231 @@
+﻿@{
+    ViewBag.Title = "全景地图";
+    ViewBag.HideFooter = true;
+}
+@using Newtonsoft.Json
+@using vgo.frontsite004.Models
+
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/panomap.css" />
+    <script type="text/javascript" src="https://map.qq.com/api/js?v=2.exp&key=R7PBZ-O5NRD-45Z4K-HU4DJ-V4PW3-E5FKW"></script>
+}
+
+<div id="map-container" style="width: 100%; height: 100vh"></div>
+
+<!-- 分类-->
+<div class="total-item" v-cloak>
+    共 <span style="color: #9c0;">{{list.length}}</span> 组全景
+</div>
+<div class="select-category" v-cloak>
+    <div class="current">{{tag}}</div>
+    <ul v-bind:style="{'height': height + 'px' }">
+        <li class="item" v-for="item in tagList" v-bind:class="item == tag ? 'active' : '' ">
+            <a href="javascript:;" @@click="selectTag(item)">{{item}}</a>
+        </li>
+    </ul>
+</div>
+
+@section scripts {
+    @{
+        Html.RenderPartial("~/Views/Shared/_VueBase.cshtml");
+    }
+    <script type="text/javascript">
+        $(function () {
+            var PROVINCES = [
+                { name: '福建省', position: { lng: 119.297, lat: 26.074199 } },
+                { name: '安徽省', position: { lng: 117.291172, lat: 31.862506 } },
+                { name: '甘肃省', position: { lng: 103.820831, lat: 36.063672 } },
+                { name: '广东省', position: { lng: 113.280637, lat: 23.125178 } },
+                { name: '贵州省', position: { lng: 106.702359, lat: 26.556565 } },
+                { name: '海南省', position: { lng: 110.336946, lat: 20.023381 } },
+                { name: '河北省', position: { lng: 114.649226, lat: 37.880523 } },
+                { name: '河南省', position: { lng: 113.476782, lat: 34.914916 } },
+                { name: '黑龙江省', position: { lng: 126.642464, lat: 45.756967 } },
+                { name: '湖北省', position: { lng: 114.269294, lat: 30.555099 } },
+                { name: '湖南省', position: { lng: 112.982279, lat: 28.19409 } },
+                { name: '吉林省', position: { lng: 125.417144, lat: 43.850735 } },
+                { name: '江苏省', position: { lng: 118.767413, lat: 32.041544 } },
+                { name: '江西省', position: { lng: 115.990816, lat: 28.759043 } },
+                { name: '辽宁省', position: { lng: 123.422661, lat: 41.764 } },
+                { name: '青海省', position: { lng: 101.848066, lat: 36.500386 } },
+                { name: '山东省', position: { lng: 117.000923, lat: 36.675807 } },
+                { name: '山西省', position: { lng: 112.549248, lat: 37.857014 } },
+                { name: '陕西省', position: { lng: 108.859359, lat: 34.376681 } },
+                { name: '四川省', position: { lng: 104.065735, lat: 30.659462 } },
+                { name: '台湾省', position: { lng: 121.517057, lat: 25.048074 } },
+                { name: '云南省', position: { lng: 102.712251, lat: 25.040609 } },
+                { name: '浙江省', position: { lng: 120.153305, lat: 30.179947 } },
+                { name: '广西壮族自治区', position: { lng: 108.337841, lat: 22.797398 } },
+                { name: '宁夏回族自治区', position: { lng: 106.274487, lat: 38.466449 } },
+                { name: '西藏自治区', position: { lng: 91.193344, lat: 29.455533 } },
+                { name: '新疆维吾尔自治区', position: { lng: 87.414047, lat: 43.57773 } },
+                { name: '内蒙古自治区', position: { lng: 111.974907, lat: 40.723179 } },
+                { name: '北京市', position: { lng: 116.397703, lat: 39.9091 } },
+                { name: '天津市', position: { lng: 116.945297, lat: 39.093112 } },
+                { name: '上海市', position: { lng: 121.473661, lat: 31.230378 } },
+                { name: '重庆市', position: { lng: 106.490987, lat: 29.546003 } },
+                { name: '香港特别行政区', position: { lng: 114.165460, lat: 22.275340 } },
+                { name: '澳门特别行政区', position: { lng: 113.549130, lat: 22.198750 } },
+            ];
+
+            new Vue({
+                el: "#app",
+                data() {
+                    return {
+                        list: [],
+                        tagList: ['选择分类', '旅游景区', '宾馆酒店', '其他'],
+                        tag: "选择分类",
+                        height: 20,
+                        map: null,
+                        markers: [],
+                        labels: []
+                    }
+                },
+                mounted() {
+                    //设置tag ul高度
+                    this.height = 20 + this.tagList.length * 30
+                    this.initMap()
+                },
+                methods: {
+                    getPanoList() {
+                        var self = this
+                        this.$service.getPanoMapList({ tag: self.tag == "选择分类" ? "" : self.tag }, function (data) {
+                            self.list = data.data
+                            if (self.map.getZoom() > 5) {
+                                self.setMarkers()
+                            } else {
+                                self.setProvinceLabel()
+                            }
+                        })
+                    },
+                    selectTag(tag) {
+                        this.tag = tag
+                        this.clearLabels();
+                        this.clearMarkers();
+                        this.getPanoList();
+                    },
+                    //地图初始化
+                    initMap() {
+                        var self = this
+                        this.map = new qq.maps.Map(document.getElementById('map-container'), {
+                            center: new qq.maps.LatLng(39.916527, 116.397128),
+                            zoom: 5,
+                            zoomControlOptions: {
+                                position: qq.maps.ControlPosition.LEFT_CENTER
+                            },
+                            panControlOptions: {
+                                position: qq.maps.ControlPosition.LEFT_CENTER
+                            }
+                        })
+                        qq.maps.event.addListener(this.map, 'zoom_changed', function (e) {
+                            self.clearLabels();
+                            self.clearMarkers()
+                            if (e.target.zoom > 5) {
+                                self.setMarkers()
+                            } else {
+                                self.setProvinceLabel()
+                            }
+                        });
+                        //获取作品数据
+                        this.getPanoList()
+                    },
+                    initInfoWindow(marker) {
+                        if (marker.imageDialog) {
+                            marker.imageDialog.open()
+                        } else {
+                            var self = this
+                            var infoWin = new qq.maps.InfoWindow({
+                                map: self.map
+                            });
+                            infoWin.open();
+                            infoWin.setPosition(marker);
+                            infoWin.setContent('<div style="width: 180px; height: 180px;"><img style="width:180px; padding: 10px;" src="' + marker.pano.panoicon_src + '"/></div>');
+                            marker.imageDialog = infoWin
+                        }
+                    },
+                    initMarker(data) {
+                        var self = this
+                        var icon = new qq.maps.MarkerImage('/content/images/panomap/marker.png');
+                        if (data.tag == "旅游景区") {
+                            icon = new qq.maps.MarkerImage('/content/images/panomap/marker1.png');
+                        }
+                        else if (data.tag == "宾馆酒店") {
+                            icon = new qq.maps.MarkerImage('/content/images/panomap/marker2.png');
+                        }
+                        var marker = new qq.maps.Marker({
+                            position: new qq.maps.LatLng(data.location_lat, data.location_lng),
+                            clickable: true,
+                            title: data.title,
+                            map: self.map,
+                            icon: icon,
+                            pano: data
+                        })
+                        qq.maps.event.addListener(marker, 'click', function () {
+                            window.open(data.panoview_url)
+                        });
+                        qq.maps.event.addListener(marker, 'mouseover', function () {
+                            self.initInfoWindow(marker)
+                        });
+                        qq.maps.event.addListener(marker, 'mouseout', function () {
+                            if (marker.imageDialog) {
+                                marker.imageDialog.close()
+                            }
+                        });
+                        this.markers.push(marker)
+                    },
+                    clearMarkers() {
+                        this.markers.forEach(function (marker) {
+                            marker.setMap(null)
+                        })
+                        this.markers = []
+                    },
+                    setMarkers() {
+                        var self = this
+                        if (this.list && this.list.length > 0) {
+                            this.list.forEach(function (data) {
+                                self.initMarker(data)
+                            })
+                        }
+                    },
+                    initLabel(province) {
+                        var self = this
+                        var contentDiv = '<div style="color: #fff; background-color: #0698e7; padding: 2px 10px; cursor: pointer; ">' + province.count + '</div>';
+                        var label = new qq.maps.Label({
+                            position: new qq.maps.LatLng(province.position.lat, province.position.lng),
+                            title: province.name + '有' + province.count + '处',
+                            offset: new qq.maps.Size(-10, 5),
+                            content: contentDiv,
+                            map: self.map
+                        })
+                        qq.maps.event.addListener(label, 'click', function () {
+                            self.map.setCenter(new qq.maps.LatLng(province.position.lat, province.position.lng))
+                            self.map.setZoom(7)
+                        });
+                        this.labels.push(label)
+                    },
+                    clearLabels() {
+                        this.labels.forEach(function (label) {
+                            label.setMap(null)
+                        })
+                        this.labels = []
+                    },
+                    setProvinceLabel() {
+                        var self = this
+                        PROVINCES.forEach(function (province) {
+                            province.count = 0
+                            province.data = [];
+                            self.list.forEach(function (data) {
+                                //有些不匹配，比如黑龙江，我们数据里是黑龙江省，多了个省字
+                                if (data.province.indexOf(province.name) != -1) {
+                                    province.count++;
+                                    province.data.push(data);
+                                }
+                            })
+                            self.initLabel(province)
+                        })
+                    }
+                }
+            })
+        })
+    </script>
+}

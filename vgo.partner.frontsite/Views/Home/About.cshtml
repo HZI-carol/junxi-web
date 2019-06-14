@@ -1,0 +1,396 @@
+﻿@{
+    ViewBag.Title = "关于我们";
+    ViewBag.Menu = "/about";
+}
+@using vgo.partner.frontsite.Models
+@{
+    var config = ViewBag.SiteConfig as SiteConfig;
+}
+
+@section head {
+    <link rel="stylesheet" type="text/css" href="/Content/css/pages/about.css" />
+}
+
+<!-- banner-->
+<div class="module-banner">
+    <img src="/content/images/about/about-banner.png" />
+</div>
+<!-- content-->
+<section class="module-content">
+    <div class="wrapper">
+        <div class="about">
+            <!-- 公司简介-->
+            <div class="company-intro">
+                <h2 class="section-title">公司简介</h2>
+                <div class="section-intro">
+                    <div class="top" style="padding-bottom: 20px;">
+                        @Html.Raw(config.about_us)
+                    </div>
+                </div>
+                <div class="section-corporate-culture">
+                    <h2 class="section-title">企业文化</h2>
+                    <ul class="point">
+                        <li class="item">
+                            <div class="icon"><i class="iconfont icon-qiyelinian"></i></div>
+                            <div class="title">发展理念</div>
+                            <p class="desc">专注于为合作伙伴提供VR全景营销解决方案。</p>
+                        </li>
+                        <li class="item">
+                            <div class="icon"><i class="iconfont icon-shiming-"></i></div>
+                            <div class="title">使命</div>
+                            <p class="desc">诚信为本，合作共赢。</p>
+                        </li>
+                        <li class="item">
+                            <div class="icon"><i class="iconfont icon-guanyuwomen-jituanwenhua-yuanjingicon"></i></div>
+                            <div class="title">愿景</div>
+                            <p class="desc">我们将一如既往秉承“顾客至上”的理念服务，共同为解决商企的营销难题而不懈努力。</p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="section-product row product">
+                    <div class="wrapper">
+                        <div class="r-title">
+                            <h2>全景行业优势</h2>
+                        </div>
+                        <div class="content">
+                            <ul class="list clearfix">
+                                <li class="list-item pos-r fl list-item text-item">
+                                    <div class="info">
+                                        <h4>市场潜力大</h4>
+                                        <p>适用于线下各个行业领域，大到政府项目、旅游景区，小到餐饮店、酒店、住宿、画展，展尽一切（房产旅游、行业会展、医院、学校、企业、商超、银行等）。</p>
+                                    </div>
+                                </li>
+                                <li class="list-item pos-r fl list-item">
+                                    <div class="icon"><img src="/content/images/index/product1.png" alt=""></div>
+                                </li>
+                                <li class="list-item pos-r fl list-item text-item">
+                                    <div class="info">
+                                        <h4>轻资产运营</h4>
+                                        <p>无需门店，1个人，1台电脑、一部单反相机（云台、镜头、三脚架）即可启动。 </p>
+                                    </div>
+                                </li>
+                                <li class="list-item pos-r fl list-item">
+                                    <div class="icon"><img src="/content/images/index/product2.png" alt=""></div>
+                                </li>
+                                <li class="list-item pos-r fl list-item">
+                                    <div class="icon"><img src="/content/images/index/product3.png" alt=""></div>
+                                </li>
+                                <li class="list-item pos-r fl list-item text-item">
+                                    <div class="info">
+                                        <h4>制作周期短</h4>
+                                        <p>一般的场景全景VR项目，拍摄制作周期时间为3~5天完成。</p>
+                                    </div>
+                                </li>
+                                <li class="list-item pos-r fl list-item">
+                                    <div class="icon"><img src="/content/images/index/product4.png" alt=""></div>
+                                </li>
+                                <li class="list-item pos-r fl list-item text-item">
+                                    <div class="info">
+                                        <h4>回报率高</h4>
+                                        <p>据当地市场情况及结合行业需求自主制定市场开发定价权，终端市场开发，商家亦可自定义价格。 </p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-profit row profit">
+                    <div class="wrapper">
+                        <div class="r-title">
+                            <h2>盈利模式</h2>
+                            <div class="sub-title">五大盈利模式为您的生意带来可观收入</div>
+                        </div>
+                        <div class="content">
+                            <div class="row item-top">
+                                <div class="item item-hover">
+                                    <div class="icon"><i class="iconfont icon-xiangjizhuanhuan"></i></div>
+                                    <h4>拍摄收入</h4>
+                                    <p>合作客户通过我们的培训后可以承接全景拍摄业务，当下全景拍摄市场涉及各个行业，拍摄需求大</p>
+                                </div>
+                                <div class="item item-hover">
+                                    <div class="icon"><i class="iconfont icon-guanggaozu"></i></div>
+                                    <h4>商家营销收入</h4>
+                                    <p>基于主平台可开设大量合作商户帐号，同时可根据合作商户需求和平台特色提供活动策划等相关业务</p>
+                                </div>
+                                <div class="item item-hover">
+                                    <div class="icon"><i class="iconfont icon-qian"></i></div>
+                                    <h4>广告投放及打赏收入</h4>
+                                    <p>平台提供专门区域投放广告，可根据广告需求进行精准投放，同时可开启打赏功能进行分润</p>
+                                </div>
+                            </div>
+                            <div class="row item-bt">
+                                <div class="item item-hover">
+                                    <div class="icon"><i class="iconfont icon-zhuanye"></i></div>
+                                    <h4>增值服务收入</h4>
+                                    <p>由于代理商可拥有无数个商户帐号，此功能可作为增值服务赠送，促进招商工作</p>
+                                </div>
+                                <div class="item item-hover">
+                                    <div class="icon"><i class="iconfont icon-zhaopin"></i></div>
+                                    <h4>代理收入</h4>
+                                    <p>拥有最高系统权限后可招募区域代理商，根据不同级别的代理商可分配不同数量的商户帐号</p>
+                                </div>
+                                <div class="item item-bgimg"><img src="/content/images/index/profit_bg.png" alt=""></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-together row together">
+                    <div class="wrapper">
+                        <div class="r-title">
+                            <h2>合作流程</h2>
+                            <div class="sub-title">清晰的合作流程，让合作双方更加快速、便捷的成功建立合作</div>
+                        </div>
+                        <div class="content">
+                            <div class="line-lee">
+                                <div class="lee-item">
+                                    <!---->
+                                    <div class="circle active">1</div>
+                                    <div class="line line-r"></div>
+                                </div>
+                                <div class="lee-item">
+                                    <div class="line line-l"></div>
+                                    <div class="circle">2</div>
+                                    <div class="line line-r"></div>
+                                </div>
+                                <div class="lee-item">
+                                    <div class="line line-l"></div>
+                                    <div class="circle">3</div>
+                                    <div class="line line-r"></div>
+                                </div>
+                                <div class="lee-item">
+                                    <div class="line line-l"></div>
+                                    <div class="circle">4</div>
+                                    <div class="line line-r"></div>
+                                </div>
+                                <div class="lee-item">
+                                    <div class="line line-l"></div>
+                                    <div class="circle">5</div>
+                                    <div class="line line-r"></div>
+                                </div>
+                                <div class="lee-item">
+                                    <div class="line line-l"></div>
+                                    <div class="circle">6</div>
+                                    <!---->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="item">
+                                    <div class="icon"><img src="/content/images/index/together1.png" alt=""></div>
+                                    <p>需求约谈</p>
+                                </div>
+                                <div class="item">
+                                    <div class="icon"><img src="/content/images/index/together2.png" alt=""></div>
+                                    <p>签订协议</p>
+                                </div>
+                                <div class="item">
+                                    <div class="icon"><img src="/content/images/index/together3.png" alt=""></div>
+                                    <p>支付款项</p>
+                                </div>
+                                <div class="item">
+                                    <div class="icon"><img src="/content/images/index/together4.png" alt=""></div>
+                                    <p>开发制作</p>
+                                </div>
+                                <div class="item">
+                                    <div class="icon"><img src="/content/images/index/together5.png" alt=""></div>
+                                    <p>后期完善</p>
+                                </div>
+                                <div class="item">
+                                    <div class="icon"><img src="/content/images/index/together6.png" alt=""></div>
+                                    <p>平台上线</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-support row support bg-opacity pos-r">
+                    <div class="wrapper pos-a">
+                        <div class="r-title">
+                            <h2>全方位渠道支持</h2>
+                        </div>
+                        <div class="content">
+                            <ul class="list tac clearfix">
+                                <li class="list-item">
+                                    <div class="icon pos-r"><img src="/content/images/index/support1.png" alt=""></div>
+                                    <div class="line-dot"></div>
+                                    <p>项目施工后援支持</p>
+                                </li>
+                                <li class="list-item">
+                                    <div class="icon pos-r"><img src="/content/images/index/support2.png" alt=""></div>
+                                    <div class="line-dot"></div>
+                                    <p>专业市场开发培训</p>
+                                </li>
+                                <li class="list-item">
+                                    <div class="icon pos-r"><img src="/content/images/index/support3.png" alt=""></div>
+                                    <div class="line-dot"></div>
+                                    <p>广告资源专属开发通道</p>
+                                </li>
+                                <li class="list-item">
+                                    <div class="icon pos-r"><img src="/content/images/index/support4.png" alt=""></div>
+                                    <div class="line-dot"></div>
+                                    <p>宣传物料支持</p>
+                                </li>
+                                <li class="list-item">
+                                    <div class="icon pos-r"><img src="/content/images/index/support5.png" alt=""></div>
+                                    <div class="line-dot"></div>
+                                    <p>行业解决方案支持 拷贝</p>
+                                </li>
+                                <li class="list-item">
+                                    <div class="icon pos-r"><img src="/content/images/index/support6.png" alt=""></div>
+                                    <div class="line-dot"></div>
+                                    <p>运营推广支持</p>
+                                </li>
+                                <li class="list-item">
+                                    <div class="icon pos-r"><img src="/content/images/index/support7.png" alt=""></div>
+                                    <div class="line-dot"></div>
+                                    <p>专业技术支持</p>
+                                </li>
+                                <li class="list-item">
+                                    <div class="icon pos-r"><img src="/content/images/index/support8.png" alt=""></div>
+                                    <div class="line-dot"></div>
+                                    <p>战略合作护航计划</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-shared row shared">
+                    <div class="wrapper">
+                        <div class="r-title">
+                            <h2>共享优势</h2>
+                        </div>
+                        <div class="content">
+                            <div class="list tac clearfix">
+                                <div class="list-item">
+                                    <div class="icon pos-r"><img src="/content/images/index/share1.png" alt=""></div>
+                                    <h4>腾讯系广告产品</h4>
+                                    <p>微信账号平台搭建、日常微信平台运营推广、活动营销、总结分析</p>
+                                </div>
+                                <div class="list-item">
+                                    <div class="icon pos-r"><img src="/content/images/index/share2.png" alt=""></div>
+                                    <h4>全景广告投放分润</h4>
+                                    <p>原创软文撰写、功能模块添加、定制福利、信息反馈</p>
+                                </div>
+                                <div class="list-item">
+                                    <div class="icon pos-r"><img src="/content/images/index/share3.png" alt=""></div>
+                                    <h4>平台升级免费共享</h4>
+                                    <p>增加个性化账号装修、前端页面设计、主题内容推荐</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="section-project-advantage mt20 business">
+                    <div class="r-title">
+                        <h2>项目优势</h2>
+                        <div class="sub-title">维构针对重点行业提供行业解决方案</div>
+                    </div>
+                    <div class="content">
+                        <div class="left fl">
+                            <h3 class="title">传统行业</h3>
+                            <ul class="compare">
+                                <li class="item">
+                                    <div class="name">
+                                        <p>缺乏展</p>
+                                        <p>示手段</p>
+                                    </div>
+                                    <div class="info">缺乏有效展示手段，局限于图片、文字等形式，受众不能全方位获取信息，很难提起购买产品的兴趣意向</div>
+                                </li>
+                                <li class="item">
+                                    <div class="name">
+                                        <p>推广</p>
+                                        <p>成本高</p>
+                                    </div>
+                                    <div class="info">推广成本高，大规模投放电视广告或地推广告所需较高的人力成本，也无法从其他竞争产品中脱颖而出，传播度低，很难创建自己的品牌形象</div>
+                                </li>
+                                <li class="item">
+                                    <div class="name">
+                                        <p>客源</p>
+                                        <p>少</p>
+                                    </div>
+                                    <div class="info">部分行业没有完善的营销规划，无法获得长期稳定的客源，潜在的客源难以转化为实际顾客</div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="center"><img src="/content/images/business/vs.png" /></div>
+                        <div class="right fr">
+                            <h3 class="title">维构全景合作行业</h3>
+                            <ul class="compare">
+                                <li class="item">
+                                    <div class="name">
+                                        <p>高效展</p>
+                                        <p>示手段</p>
+                                    </div>
+                                    <div class="info">通过维构VR全景系统，可以帮助各行业商家可以快速制作全景实景，720°展现场景+深度互动功能，全面激发顾客的购买意向</div>
+                                </li>
+                                <li class="item">
+                                    <div class="name">
+                                        <p>推广</p>
+                                        <p>成本低</p>
+                                    </div>
+                                    <div class="info">通过维构VR全景系统制作的全景图进行推广宣传，同时可以利用微信绑定功能在微信等社交平台进行广泛传播</div>
+                                </li>
+                                <li class="item">
+                                    <div class="name">
+                                        <p>高效</p>
+                                        <p>营销</p>
+                                    </div>
+                                    <div class="info">通过维构VR全景营销系统可以实现展示-预定/购买一站式服务，同时在全景展示中植入营销插件开展热门营销活动，在短时间内引起裂变式营销反应。</div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-vr-background">
+                    <h2 class="section-title">VR全景行业背景</h2>
+                    <ul class="content">
+                        <li class="item">
+                            <img class="item-img" src="/content/images/business/vr-background1.png" />
+                            <h3 class="item-title">全景概述</h3>
+                            <div class="item-desc">
+                                <p>全景技术是一种通过数码相机与计算机技术实现真实场景的还原展示和全方位互动式观看的三维虚拟展示技术。随着网络技术的发展，全景技术的优越性更加突出。它改变了传统网络平淡的特点，让人们在网上能够进行360°全景观察，而且通过交互操作，可以实现自由浏览，从而体验三维的VR视觉世界。</p>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <img class="item-img" src="/content/images/business/vr-background2.png" />
+                            <h3 class="item-title">全景行业覆盖</h3>
+                            <div class="item-desc">
+                                <p>VR全景以全新的真实感体验和交互式感受的视觉技术迅速得到推崇，它广泛应用于三维实景漫游，如智慧商业、电子商务、房产、旅游、教育、展会、企业宣传等广大领域。</p>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <img class="item-img" src="/content/images/business/vr-background3.png" />
+                            <h3 class="item-title">全景概述</h3>
+                            <div class="item-desc">
+                                <p>2016年，暴风魔镜、知萌咨询与国家广告研究院联合发布了首份《中国 VR 用户行为研究报告》 ，报告显示VR潜在用户有2.86 亿，其中有96万为重度VR用户。而从当前VR重度用户特征来看，青年男性、宅男宅女，科技达人、网游电竞成为了VR重度用户最重要的标签。</p>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <img class="item-img" src="/content/images/business/vr-background4.png" />
+                            <h3 class="item-title">国家政策</h3>
+                            <div class="item-desc">
+                                <p>
+                                    ① VR创业小镇：	各地政府支持建设VR创业小镇，多重补贴支持VR创业公司：2016年6月福建东湖VR小镇；2017年5月贵州北斗湾VR小镇……
+                                    ② VR发展文件：	2018年5月21日，工信部电子信息司副司长吴胜武表示：工信部将组织制定《关于加快推进虚拟现实产业发展的指导意见》政策文件，通过五大方面继续推进虚拟现实产业健康快速发展。
+                                    ③ 专题推介：   中央乃至各地政府定期举办VR产业招商引资专题推介会推进VR行业发展。
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script type="text/javascript" src="/Content/js/pages/about.js"></script>
+}
